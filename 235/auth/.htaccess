@@ -1,0 +1,5 @@
+AuthType shobboleth
+AuthName "RIT"
+ShibRequireSession On
+SSLRequireSSL
+require valid-user
