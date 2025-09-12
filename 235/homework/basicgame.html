@@ -10,8 +10,11 @@
             font-family: 'Arial', Arial, sans-serif;
         }
         body{
+            display: flex;
+            flex-direction: column;
             background-image: url("images/scanline.png");
             margin: 0;
+            height: 100%;
             background-color: #222;
         }
         main{
@@ -90,10 +93,16 @@
             border-top: white solid;
             border-bottom: white solid;
         }
+        /*
+        .background-image h2{
+            color: #1f1c3d
+        }
+        */
         .screenshots{
             display: flex;
             justify-content: space-around;
             width: 100%;
+            color: #1f1c3d
         }
         
         .screenshot-container{
@@ -103,7 +112,13 @@
             justify-content: center;
             padding-top: 20px;
             width: 24vw;
+            color: #1f1c3d
         }
+        /*
+        .screenshot-container p{
+            
+        }
+        */
         .screenshot-img{
             box-shadow: 0px 0px 15px rgba(0, 0, 0, .7); 
             width: 100%;
@@ -120,6 +135,7 @@
             flex-direction: row;
             justify-content: space-around;
             align-items: center;
+            padding-bottom: 3vh;
         }
         .review{
             display: flex;
@@ -143,15 +159,28 @@
         h2{
             text-align: center;
         }
+        .pub-info-container{
+            display: flex;
+            flex-direction: row;
+        }
+        .pub-info{
+            display: flex;  
+            width: 50%;
+            background-color: #111;
+        }
+        footer{
+            background-color: black;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="navbar">
             <a href="#desc">Description</a>
-            <a href="#screenshots">Sreenshots</a>
+            <a href="#screenshots">Screenshots</a>
+            <a href="#download">Download</a>
             <a href="#pub">Publishing Info</a>
-            <a href="#genre">Genre</a>
             <a href="#rev">Reviews</a>
             <a href="#source">Citations</a>
         </div>
@@ -192,27 +221,12 @@
             </div>
         </div>
         <hr>
-
-        <h2 id="pub">Publishing Info</h2>
-        <p>Publishers</p>
-        <ul>
-            <li>Deck13 Interactive GmbH</li>
-            <li>DANGEN Entertainment KK</li>
-        </ul>
-        <p >Developers</p>
-        <ul>
-            <li>Radical Fish Games</li>
-        </ul>
+        <h2 id="download">Download</h2>
+        <button>
+            <a href="https://store.steampowered.com/app/368340/CrossCode/">Download</a>
+        </button>
         <hr>
-
-        <h2 id="genre">Genre</h2>
-        <ul>
-            <li>Action RPG</li>
-            <li>Puzzle</li>
-            <li>2D Diagonal Down</li>
-        </ul>
-        <hr>
-
+        
         <h2 id="rev">Reviews</h2>
         <div class="reviews">
             <div class="review">
@@ -228,12 +242,25 @@
                 <p id="circle-text"> - Garri Bagdasarov (<a href="https://www.psu.com/reviews/crosscode-ps4-review/">Playstation Universe</a>)</p>
             </div>
         </div>
-            <hr>
+        <hr>
+
+        <h2 id="pub">Publishing Info</h2>
+        <div id="pub-info-container">
+            <div class="pub-info">
+                <h3>Publishers</h3>
+                <p>Deck13 Interactive GmbH</p>
+                <p>DANGEN Entertainment KK</p>
+            </div>
+            <div class="pub-info">
+            <h3>Developers</h3>
+            <p>Radical Fish Games</li>
+            </div>
+        </div>
     </main>
     
     <footer>
         <h2 id="source">Sources</h2>
-        <p><a href="https://www.mobygames.com/game/84453/crosscode/">https://www.mobygames.com/game/84453/crosscode/</a></p>
+        <p><a href="https://www.mobygames.com/game/84453/crosscode/">Moby Games</a></p>
     </footer>
 </body>
 </html>
