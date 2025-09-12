@@ -7,7 +7,7 @@
     <style>
         *{
             color: white;
-            font-family: 'Arial', Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
         body{
             display: flex;
@@ -57,6 +57,22 @@
             transition: .3s;
             background-color: #333;
         }
+        h2{
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        #description{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: justify;
+            width: 70%;
+            padding-left: 15%;
+        }
+        #description-line{
+            text-align: center;
+        }
         .parallax {
             display: flex;
             overflow-x: hidden;
@@ -93,11 +109,6 @@
             border-top: white solid;
             border-bottom: white solid;
         }
-        /*
-        .background-image h2{
-            color: #1f1c3d
-        }
-        */
         .screenshots{
             display: flex;
             justify-content: space-around;
@@ -114,11 +125,10 @@
             width: 24vw;
             color: #1f1c3d
         }
-        /*
         .screenshot-container p{
-            
+            text-align: center;
+            font-size: 1vw;   
         }
-        */
         .screenshot-img{
             box-shadow: 0px 0px 15px rgba(0, 0, 0, .7); 
             width: 100%;
@@ -129,7 +139,40 @@
         .screenshot-img:hover{
             transform: scale(1.2);
         }
-
+        .button-container{
+            height: 10vh;
+        }
+        button{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            margin: auto;
+            background: #171a21;
+            border: 1px solid #171a21;
+            border-radius: 6px;
+            box-shadow: rgba(21, 31, 48, 5) 0px 0px 4px;
+            color: #FFFFFF;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 800;
+            min-height: 6vh;
+            min-width: 10vw;
+            padding: 12px 14px;
+            text-align: center;
+            text-decoration: none;
+            transition: .3s;
+            transform: scale(2);
+        }
+        #steam-logo{
+            height: 3vh;
+        }
+        button:hover{
+            transition: .3s;
+            background: #1b2838;
+            border: 1px solid #1b2838;
+            box-shadow: rgba(42, 71, 98, 5) 0px 0px 4px;
+            transform: scale(2.1);
+        }
         .reviews{
             display: flex;
             flex-direction: row;
@@ -140,55 +183,75 @@
         .review{
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
-            text-align: justify;
+            align-items: center;
+            text-align: center;
             background-color: #444;
-            overflow-wrap: break-word; 
             height: 20vw;
             width: 20vw;
             border-radius: 10%;
-            position: relative;
             padding: 10px;
             box-shadow: 0px 0px 15px rgba(50, 50, 50, .7); 
         }
-        #circle-text{
-            text-align: center;
 
-        }
-        
-        h2{
-            text-align: center;
-        }
-        .pub-info-container{
+        .review blockquote{
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            font-size: 1vw;
+            height: 100%;
+            width: 90%;
+        }
+        #quotee{
+            text-align: center;
+            height: 10%;
+            font-size: 1.25vw;
+        }
+        
+        
+        .pub-info-container{
+            display: flex;
             flex-direction: row;
+            justify-content: space-evenly;
             width: 100%;
+            height: 100%;
         }
         .pub-container{
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 30%;
-            height: 30vh;
-            background-color: gray;
+            background-color: #555;
+            border-radius: 10px;
         }
         .publishers{
             display: flex;
             flex-direction: row;
             align-items: center;
+            width: 100%;
             justify-content: space-around;
+            text-align: center;
         }
         .pub-info{
             display: flex;
             flex-direction: column;
+            align-items: center;
+            width: 100%;
         }
         #logo{
             width: 90%;
+            cursor: pointer;
         }
         footer{
             background-color: black;
+            z-index: 2;
+            width: 100%;
+        }
+        #sources{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            text-decoration: none;
+            padding: 10px;
+            width: 100%;
         }
     </style>
 </head>
@@ -210,54 +273,56 @@
     
     <main>
         <img id="lea" src="images/lea-smug-flipped.png" alt="">
-
         <h2 id="desc">Description</h2> <hr class="tiny-line">
-        <p>
-            CrossCode is a single-player action role-playing game. <br><br>
-            The game is set within CrossWorlds, a fictional MMORPG environment where players control avatars while exploring large regions, completing quests, and fighting enemies. The player takes on the role of Lea, a young woman who enters CrossWorlds without her memories and with limited ability to speak. As she explores the in-game world, she undertakes missions for guilds and NPCs, searches for fragments of her past, and gradually unravels the mystery of her existence.<br><br>
-            Gameplay combines fast-paced action combat with puzzle-solving and exploration. Players control Lea from a top-down perspective, using melee and ranged attacks against enemies in real-time. Ranged combat involves aiming projectile orbs that can ricochet off surfaces, while melee attacks provide close-range options. Dodging, guarding, and exploiting elemental weaknesses are essential for survival, especially during boss encounters. Enemies drop loot and experience points, which contribute to progression and new abilities.<br><br>
-            Character growth is managed through a skill grid system, where points earned from leveling up can be invested in different combat branches such as melee, ranged, defense, and special techniques. Lea also unlocks elemental modes like fire, ice, wave, and shock, which expand combat strategies and are often required to solve environmental puzzles. Equipment can be acquired from shops, quests, or crafting, allowing players to customize stats such as health, attack power, and resistances.<br><br>
-            Puzzle-solving is a central part of exploration. Many dungeons require using the ricochet mechanic to hit switches or activate mechanisms, often under time constraints. These challenges increase in complexity as new elemental powers are introduced. Platforming-like sequences involve timing jumps across gaps, navigating obstacles, and combining movement with puzzle elements.<br><br>
-            Outside of combat and dungeons, the game includes an extensive side-quest system provided by NPCs across towns and hubs. Quests range from fetch objectives to combat challenges, often granting unique rewards or gear. Guilds allow players to participate in optional storylines and further expand Lea’s interactions within CrossWorlds.<br>
-        </p>
-        <hr>
+        <div id="description">
+            <p id="description-line">CrossCode is a single-player action role-playing game.</p>
+            <p>The game is set within CrossWorlds, a fictional MMORPG environment where players control avatars while exploring large regions, completing quests, and fighting enemies. The player takes on the role of Lea, a young woman who enters CrossWorlds without her memories and with limited ability to speak. As she explores the in-game world, she undertakes missions for guilds and NPCs, searches for fragments of her past, and gradually unravels the mystery of her existence.</p>
+            <p>Gameplay combines fast-paced action combat with puzzle-solving and exploration. Players control Lea from a top-down perspective, using melee and ranged attacks against enemies in real-time. Ranged combat involves aiming projectile orbs that can ricochet off surfaces, while melee attacks provide close-range options. Dodging, guarding, and exploiting elemental weaknesses are essential for survival, especially during boss encounters. Enemies drop loot and experience points, which contribute to progression and new abilities.</p>
+            <p>Character growth is managed through a skill grid system, where points earned from leveling up can be invested in different combat branches such as melee, ranged, defense, and special techniques. Lea also unlocks elemental modes like fire, ice, wave, and shock, which expand combat strategies and are often required to solve environmental puzzles. Equipment can be acquired from shops, quests, or crafting, allowing players to customize stats such as health, attack power, and resistances.</p>
+            <p>Puzzle-solving is a central part of exploration. Many dungeons require using the ricochet mechanic to hit switches or activate mechanisms, often under time constraints. These challenges increase in complexity as new elemental powers are introduced. Platforming-like sequences involve timing jumps across gaps, navigating obstacles, and combining movement with puzzle elements.</p>
+            <p>Outside of combat and dungeons, the game includes an extensive side-quest system provided by NPCs across towns and hubs. Quests range from fetch objectives to combat challenges, often granting unique rewards or gear. Guilds allow players to participate in optional storylines and further expand Lea’s interactions within CrossWorlds.<br><br></p>
+        </div>
         <div class="background-image">
             <h2>Screenshots</h2>
             <div class="screenshots">
                 <div class="screenshot-container">
                     <img class="screenshot-img" src="images/CherryTree.png" alt="">
-                    <p>hi</p>
+                    <p>Explore beautiful pixel environments</p>
                 </div>
                 <div class="screenshot-container">
                     <img class="screenshot-img" src="images/Dungeon.jpg" alt="">
-                    <p>hi</p>
+                    <p>Solve puzzles in challening dungeons</p>
                 </div>
                 <div class="screenshot-container">
                     <img class="screenshot-img" src="images/desert.jpg" alt="">
-                    <p>hi</p>
+                    <p>Fight enemies with 4 different elements</p>
                 </div>
             </div>
         </div>
         <hr>
-        <h2 id="download">Download</h2>
-        <button>
-            <a href="https://store.steampowered.com/app/368340/CrossCode/">Download</a>
-        </button>
+        <h2 id="download">Download</h2><br>
+        <div class="button-container">
+            <button>
+                <img id="steam-logo" src="images/Steam_icon_logo.svg" alt="">
+                <a href="https://store.steampowered.com/app/368340/CrossCode/">Steam Page</a>
+            </button>
+        </div>
+        <br>
         <hr>
         
         <h2 id="rev">Reviews</h2>
         <div class="reviews">
             <div class="review">
                 <blockquote>"CrossCode is a wonderfully told, and downright fun to play game. Fans of Secret of Mana and similar RPGs will find themselves right at home. CrossCode is full of charm, and with the accessibility sliders available, there is no excuse for not getting your paws on this game and enjoying everything this polished title has to offer. And did we mention it’s coded completely in HTML5? CrossCool!"</blockquote>
-                <p id="circle-text"> - Brian Para (<a href="https://catwithmonocle.com/news/2020/07/17/crosscode-review/">Cat with Monocle</a>)</p>
+                <p id="quotee"> - Brian Para (<a href="https://catwithmonocle.com/news/2020/07/17/crosscode-review/">Cat with Monocle</a>)</p>
             </div>
             <div class="review">
                 <blockquote>"I can understand why it is regarded so highly in terms of indie RPGs. The puzzles are most definitely on par with even the Zelda franchise, and you can tell that a lot of love and care went into it. CrossCode is a love letter to Action-RPGs and I can honestly say that it deserves all the accolades it has received."</blockquote>
-                <p id="circle-text"> - Alex Aplin (<a href="https://web.phenixxgaming.com/2020/08/04/crosscode-ps4-review/">Phenixx Gaming</a>)</p>
+                <p id="quotee"> - Alex Aplin (<a href="https://web.phenixxgaming.com/2020/08/04/crosscode-ps4-review/">Phenixx Gaming</a>)</p>
             </div>
             <div class="review">
                 <blockquote>"Radical Fish Games has taken eight years to craft one of the best indie titles of the year. With an interesting story, great combat, exciting and rewarding exploration CrossCode not only pays homage to some of the best retro action-RPGs it also proves that a small studio with love and passion for their project can rival the million-dollar blockbusters we've grown so used to. Trust me, you won't want to miss out on this future classic."</blockquote>
-                <p id="circle-text"> - Garri Bagdasarov (<a href="https://www.psu.com/reviews/crosscode-ps4-review/">Playstation Universe</a>)</p>
+                <p id="quotee"> - Garri Bagdasarov (<a href="https://www.psu.com/reviews/crosscode-ps4-review/">Playstation Universe</a>)</p>
             </div>
         </div>
         <hr>
@@ -268,31 +333,44 @@
                 <h3>Publishers</h3>
                 <div class="publishers">
                     <div class="pub-info">
-                        <img id="logo" src="images/Deck13-Interactive.png" alt="">
+                        <a href="https://www.deck13.com/"><img id="logo" src="images/Deck13-Interactive.png" alt=""></a>
                     </div>
                     <div class="pub-info">
-                        <img id="logo" src="images/DANGEN-Ent.png" alt="">
+                        <a href="https://dangenentertainment.com/"><img id="logo" src="images/DANGEN-Ent.png" alt=""></a>
                     </div>
-                </div>
-                <div class="publishers">
-                    <p>Deck13 Interactive</p>
-                    <p>DANGEN Entertainment</p>
                 </div>
             </div>
             <div class="pub-container">
                 <h3>Developers</h3>
-                <img id="logo" src="images/radical-fish-logo.png" alt="">
-                <p>Radical Fish Games</li>
+                <a class="pub-info"  href="https://www.radicalfishgames.com/"><img id="logo" src="images/radical-fish-logo.png" alt=""></a>
             </div>
         </div>
+        <br>
     </main>
     
     <footer>
         <h2 id="source">Sources</h2>
-        <p><a href="https://www.mobygames.com/game/84453/crosscode/">Moby Games</a></p>
-        <a href="https://www.gematsu.com/wp-content/uploads/2022/04/Company-Logo_Deck13-Interactive-Inits.png">deck 13 logo</a>
-        <a href="https://www.gematsu.com/wp-content/uploads/2021/10/Company-Logo_DANGEN-Ent.png">dangen ent logo</a>
-        <a href="https://www.radicalfishgames.com/presskit/images/logo.png">radical fish logo</a>
+        <div id="sources">
+            <a href="https://www.mobygames.com/game/84453/crosscode/">Moby Games</a>
+            <a href="https://goombastomp.com/wp-content/uploads/2020/07/crosscode.png">Cross Code Background</a>
+            <a href="https://www.strictlylimitedgames.com/cdn/shop/articles/CrossCode-Logo-RGB.png?v=1667298641">Cross Code Logo</a>
+            <a href="https://anonagi.home.blog/wp-content/uploads/2019/07/lea-smug-flipped.png">Smug Lea</a>
+            <a href="https://store.steampowered.com/app/368340/CrossCode/">Steam Page</a>
+        </div>
+        <div id="sources">
+            <a href="https://i0.wp.com/smashpad.com/wp-content/uploads/2020/07/bergen-top.png?fit=620%2C349&ssl=1">Screenshots Background</a>
+            <a href="https://img.itch.zone/aW1hZ2UvMTk5NTMvNTM1NDcwLnBuZw==/original/9A0fd9.png">Cherry Blossom Screenshot</a>
+            <a href="https://www.nintendoworldreport.com/media/49457/1/5.jpg">Dungeon Screenshot</a>
+            <a href="https://www.godisageek.com/wp-content/uploads/CrossCode-ss-065.jpg">Desert Screenshot</a>
+            <a href="https://cross-code.com/en/home">Cross Code Website</a>
+        </div>
+        <div id="sources">
+            <a href="https://www.gematsu.com/wp-content/uploads/2022/04/Company-Logo_Deck13-Interactive-Inits.png">Deck 13 Interactive Logo</a>
+            <a href="https://www.gematsu.com/wp-content/uploads/2021/10/Company-Logo_DANGEN-Ent.png">Dangen Entertainment Logo</a>
+            <a href="https://www.radicalfishgames.com/presskit/images/logo.png">Radical Fish logo</a>
+            <a href="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg">Steam Logo</a>
+            <a href="https://forums.libretro.com/uploads/default/original/2X/3/3a57f4a9ca1419203565fd9e8f90cd2d2eb7668a.png">Scanline Filter</a>
+        </div>
     </footer>
 </body>
 </html>
