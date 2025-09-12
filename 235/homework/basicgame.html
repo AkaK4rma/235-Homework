@@ -10,27 +10,52 @@
             font-family: 'Arial', Arial, sans-serif;
         }
         body{
+            background-image: url("images/scanline.png");
             margin: 0;
-            background-color: black;
+            background-color: #222;
         }
         main{
-            margin: 10;
+            margin: 10px;
+        }
+        #lea{
+            right: 0;
+            bottom: -15%;
+            transition: .5s;
+            position: fixed;
+            z-index: 2;
+            transform: scaleX(-1);
+        }
+        #lea:hover{
+            transition: .5s;
+            bottom: 0;
+        }
+        #bar{
+            height: 7vh; 
+            background-color: #111;
         }
         .navbar{
-            background-color: black;
+            background-color: #111;
+            transition: .3s;
+            display: flex;
+            align-items: center;
             position: fixed;
             width: 100%;
-            height: 5vh;
-            z-index: 1;
+            height: 7vh;
+            z-index: 2;   
         }
-        #navbar a{
+        .navbar a{
+            display: flex;
             float: left;
-            display: block;
-            text-align: center;
+            position: center;
             text-decoration: none;
-            padding: 15px 10px;
+            padding: 10px;
+        }
+        .navbar a:hover{
+            transition: .3s;
+            background-color: #333;
         }
         .parallax {
+            display: flex;
             overflow-x: hidden;
             overflow-y: auto;
             background-image: url("images/crosscode.png");
@@ -40,12 +65,82 @@
             background-attachment: fixed;
             position: relative;
             min-height: 40vh;
+            align-items: center;
+            justify-content: center;
             margin: 0 0;
         }
-        .parallax-text {
+        .parallax-logo {
             position: relative;
+            height: 20vh;
         }
-        h1{
+
+        .tiny-line{
+            width: 50%;
+        }
+
+        .background-image{
+            background-image: url("images/bergen-top.png");
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            min-height: 40vh;
+            margin: -10px;
+            border-top: white solid;
+            border-bottom: white solid;
+        }
+        .screenshots{
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        
+        .screenshot-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+            width: 24vw;
+        }
+        .screenshot-img{
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, .7); 
+            width: 100%;
+            z-index: 1;
+            transform:scale(1);
+            transition:transform 0.3s ease-out;
+        }
+        .screenshot-img:hover{
+            transform: scale(1.2);
+        }
+
+        .reviews{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .review{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            text-align: justify;
+            background-color: #444;
+            overflow-wrap: break-word; 
+            height: 20vw;
+            width: 20vw;
+            border-radius: 10%;
+            position: relative;
+            padding: 10px;
+            box-shadow: 0px 0px 15px rgba(50, 50, 50, .7); 
+        }
+        #circle-text{
+            text-align: center;
+
+        }
+        
+        h2{
             text-align: center;
         }
     </style>
@@ -54,17 +149,22 @@
     <header>
         <div class="navbar">
             <a href="#desc">Description</a>
+            <a href="#screenshots">Sreenshots</a>
             <a href="#pub">Publishing Info</a>
             <a href="#genre">Genre</a>
             <a href="#rev">Reviews</a>
             <a href="#source">Citations</a>
         </div>
+        <div id="bar"></div>
         <div class="parallax">
-        <div class="parallax-text"><h1>CrossCode</h1></div>
+            <img class="parallax-logo" src="images/CrossCode-Logo-RGB.webp" alt="">
+        </div>
     </header>
     
     <main>
-        <h2 id="desc">Description</h2>
+        <img id="lea" src="images/lea-smug-flipped.png" alt="">
+
+        <h2 id="desc">Description</h2> <hr class="tiny-line">
         <p>
             CrossCode is a single-player action role-playing game. <br><br>
             The game is set within CrossWorlds, a fictional MMORPG environment where players control avatars while exploring large regions, completing quests, and fighting enemies. The player takes on the role of Lea, a young woman who enters CrossWorlds without her memories and with limited ability to speak. As she explores the in-game world, she undertakes missions for guilds and NPCs, searches for fragments of her past, and gradually unravels the mystery of her existence.<br><br>
@@ -73,9 +173,25 @@
             Puzzle-solving is a central part of exploration. Many dungeons require using the ricochet mechanic to hit switches or activate mechanisms, often under time constraints. These challenges increase in complexity as new elemental powers are introduced. Platforming-like sequences involve timing jumps across gaps, navigating obstacles, and combining movement with puzzle elements.<br><br>
             Outside of combat and dungeons, the game includes an extensive side-quest system provided by NPCs across towns and hubs. Quests range from fetch objectives to combat challenges, often granting unique rewards or gear. Guilds allow players to participate in optional storylines and further expand Lea’s interactions within CrossWorlds.<br>
         </p>
-        <div class="screenshots">
-            <!--insert ss here lol-->
+        <hr>
+        <div class="background-image">
+            <h2>Screenshots</h2>
+            <div class="screenshots">
+                <div class="screenshot-container">
+                    <img class="screenshot-img" src="images/CherryTree.png" alt="">
+                    <p>hi</p>
+                </div>
+                <div class="screenshot-container">
+                    <img class="screenshot-img" src="images/Dungeon.jpg" alt="">
+                    <p>hi</p>
+                </div>
+                <div class="screenshot-container">
+                    <img class="screenshot-img" src="images/desert.jpg" alt="">
+                    <p>hi</p>
+                </div>
+            </div>
         </div>
+        <hr>
 
         <h2 id="pub">Publishing Info</h2>
         <p>Publishers</p>
@@ -83,22 +199,38 @@
             <li>Deck13 Interactive GmbH</li>
             <li>DANGEN Entertainment KK</li>
         </ul>
-        
         <p >Developers</p>
         <ul>
             <li>Radical Fish Games</li>
         </ul>
+        <hr>
+
         <h2 id="genre">Genre</h2>
         <ul>
             <li>Action RPG</li>
             <li>Puzzle</li>
             <li>2D Diagonal Down</li>
         </ul>
+        <hr>
 
         <h2 id="rev">Reviews</h2>
-            <blockquote>Radical Fish Games has taken eight years to craft one of the best indie titles of the year. With an interesting story, great combat, exciting and rewarding exploration CrossCode not only pays homage to some of the best retro action-RPGs it also proves that a small studio with love and passion for their project can rival the million-dollar blockbusters we've grown so used to. Trust me, you won't want to miss out on this future classic. - Garri Bagdasarov (<a href="https://www.psu.com/reviews/crosscode-ps4-review/">Playstation Universe</a>)</blockquote>
+        <div class="reviews">
+            <div class="review">
+                <blockquote>"CrossCode is a wonderfully told, and downright fun to play game. Fans of Secret of Mana and similar RPGs will find themselves right at home. CrossCode is full of charm, and with the accessibility sliders available, there is no excuse for not getting your paws on this game and enjoying everything this polished title has to offer. And did we mention it’s coded completely in HTML5? CrossCool!"</blockquote>
+                <p id="circle-text"> - Brian Para (<a href="https://catwithmonocle.com/news/2020/07/17/crosscode-review/">Cat with Monocle</a>)</p>
+            </div>
+            <div class="review">
+                <blockquote>"I can understand why it is regarded so highly in terms of indie RPGs. The puzzles are most definitely on par with even the Zelda franchise, and you can tell that a lot of love and care went into it. CrossCode is a love letter to Action-RPGs and I can honestly say that it deserves all the accolades it has received."</blockquote>
+                <p id="circle-text"> - Alex Aplin (<a href="https://web.phenixxgaming.com/2020/08/04/crosscode-ps4-review/">Phenixx Gaming</a>)</p>
+            </div>
+            <div class="review">
+                <blockquote>"Radical Fish Games has taken eight years to craft one of the best indie titles of the year. With an interesting story, great combat, exciting and rewarding exploration CrossCode not only pays homage to some of the best retro action-RPGs it also proves that a small studio with love and passion for their project can rival the million-dollar blockbusters we've grown so used to. Trust me, you won't want to miss out on this future classic."</blockquote>
+                <p id="circle-text"> - Garri Bagdasarov (<a href="https://www.psu.com/reviews/crosscode-ps4-review/">Playstation Universe</a>)</p>
+            </div>
+        </div>
+            <hr>
     </main>
-
+    
     <footer>
         <h2 id="source">Sources</h2>
         <p><a href="https://www.mobygames.com/game/84453/crosscode/">https://www.mobygames.com/game/84453/crosscode/</a></p>
