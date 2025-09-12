@@ -161,16 +161,34 @@
         }
         .pub-info-container{
             display: flex;
+            align-items: center;
+            justify-content: space-around;
             flex-direction: row;
+            width: 100%;
+        }
+        .pub-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+            height: 30vh;
+            background-color: gray;
+        }
+        .publishers{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
         }
         .pub-info{
-            display: flex;  
-            width: 50%;
-            background-color: #111;
+            display: flex;
+            flex-direction: column;
+        }
+        #logo{
+            width: 90%;
         }
         footer{
             background-color: black;
-            width: 100%;
         }
     </style>
 </head>
@@ -245,15 +263,26 @@
         <hr>
 
         <h2 id="pub">Publishing Info</h2>
-        <div id="pub-info-container">
-            <div class="pub-info">
+        <div class="pub-info-container">
+            <div class="pub-container">
                 <h3>Publishers</h3>
-                <p>Deck13 Interactive GmbH</p>
-                <p>DANGEN Entertainment KK</p>
+                <div class="publishers">
+                    <div class="pub-info">
+                        <img id="logo" src="images/Deck13-Interactive.png" alt="">
+                    </div>
+                    <div class="pub-info">
+                        <img id="logo" src="images/DANGEN-Ent.png" alt="">
+                    </div>
+                </div>
+                <div class="publishers">
+                    <p>Deck13 Interactive</p>
+                    <p>DANGEN Entertainment</p>
+                </div>
             </div>
-            <div class="pub-info">
-            <h3>Developers</h3>
-            <p>Radical Fish Games</li>
+            <div class="pub-container">
+                <h3>Developers</h3>
+                <img id="logo" src="images/radical-fish-logo.png" alt="">
+                <p>Radical Fish Games</li>
             </div>
         </div>
     </main>
@@ -261,6 +290,9 @@
     <footer>
         <h2 id="source">Sources</h2>
         <p><a href="https://www.mobygames.com/game/84453/crosscode/">Moby Games</a></p>
+        <a href="https://www.gematsu.com/wp-content/uploads/2022/04/Company-Logo_Deck13-Interactive-Inits.png">deck 13 logo</a>
+        <a href="https://www.gematsu.com/wp-content/uploads/2021/10/Company-Logo_DANGEN-Ent.png">dangen ent logo</a>
+        <a href="https://www.radicalfishgames.com/presskit/images/logo.png">radical fish logo</a>
     </footer>
 </body>
 </html>
