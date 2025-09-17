@@ -1,0 +1,23 @@
+/* Do everything in this file */
+h1, h2, h3, h4, h5, h6{
+    border-bottom: 1px red solid;
+}
+figure{
+    float:right;
+    width: 40%;
+    margin-left: 10px;
+}
+figure img{
+    width: 100%;
+}
+h2{
+    clear: both;
+}
+div img{
+    float: left;
+    width: 35%;
+    border: purple 1px solid;
+}
+footer{
+    clear: both;
+}
