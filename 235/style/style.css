@@ -1,0 +1,107 @@
+@font-face {
+    font-family: Caramel;
+    src: url(XCicero_Caramel/Caramel-Regular.otf);
+}
+@font-face {
+    font-family: Grave;
+    src: url(XCicero_GravePresse/GravePresse-ExtraBold.otf);
+}
+
+body{
+    margin: 0 2vw;
+}
+.bar-right{
+    background-color: black;
+    position: fixed;
+    height: 100%;
+    width: 2vw;
+    right: 0;
+}
+.bar-left{
+    background-color: black;
+    position: fixed;
+    height: 100%;
+    width: 2vw;
+    left: 0;
+}
+.wrapper {
+  max-width: 100%;
+  overflow: hidden;
+  border-bottom: black 3px solid;
+  font-family: Grave , sans-serif;
+}
+
+header{
+    padding: 1vh;
+    display: flex;
+    width: 75%;
+    align-items: center;
+    justify-content: center;
+}
+header h1{
+    font-family: Caramel, sans-serif;
+}
+header h3{
+    font-family: 'Arial Narrow', sans-serif;
+}
+.page title{
+    display: flex;
+    flex-direction: column;
+}
+.image{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+.socials{
+    display: flex;
+    height: 7vh;
+    align-items: center;
+    justify-content: center;
+    border-top: black solid 3px;
+    border-bottom: black solid 3px;
+}
+
+.paragraph{
+    margin: 0 auto;
+    width: 50%;
+}
+
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: marquee 10s linear infinite;
+}
+
+.marquee p {
+  display: inline-block;
+  
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.dither-container {
+
+  width: 100%;
+
+  height: 100%;
+
+  position: relative;
+
+}
+img{
+    width: 90%;
+}
+
+footer{
+    height: 10vh;
+}
