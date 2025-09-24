@@ -242,16 +242,17 @@ main {
   height: 4.5vh;
 }
 
-.button a {
+.button p{
   padding-left: 5px;
+  text-decoration: none;
 }
 
-.button a:link {
+a:link .button  {
   text-decoration: none;
   color: black;
 }
 
-.button a:visited {
+a:visited .button  {
   text-decoration: none;
   color: black;
 }

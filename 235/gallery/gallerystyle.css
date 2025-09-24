@@ -2,22 +2,7 @@
     margin: 0;
     font-family: 'Courier New', Courier, monospace, serif;
 }
-.bar-right{
-    background-color: black;
-    position: fixed;
-    height: 100%;
-    width: 2vw;
-    right: 0;
-    top: 0;
-}
-.bar-left{
-    background-color: black;
-    position: fixed;
-    height: 100%;
-    width: 2vw;
-    left: 0;
-    top: 0;
-}
+
 .navbar{
     display: flex;
     justify-content: center;
@@ -29,7 +14,7 @@
     top: 0;   
 }
 .navbar p{
-    width: 36%;
+    width: 90%;
     background-color: rgba(255, 255, 255, .5);
     backdrop-filter: blur(5px);
 }
@@ -47,8 +32,8 @@ a{
 }
 .content{
     margin: 0 auto;
-    margin-top: 90px;
-    width: 37%;
+    margin-top: 20px;
+    width: 80%;
 }
 .content h1{
     text-align: right;
@@ -98,4 +83,45 @@ h3 a:hover{
     background-color: black;
     color: white;
     transition: .5s ease;
+}
+
+@media only screen and (min-width: 760px) {
+    .bar-right{
+        background-color: black;
+        position: fixed;
+        height: 100%;
+        width: 2vw;
+        right: 0;
+        top: 0;
+    }
+    .bar-left{
+        background-color: black;
+        position: fixed;
+        height: 100%;
+        width: 2vw;
+        left: 0;
+        top: 0;
+    }
+    .navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 1em;
+    width: 100%;
+    z-index: 1;
+    top: 0;   
+    }
+    
+    .navbar p{
+    width: 36%;
+    background-color: rgba(255, 255, 255, .5);
+    backdrop-filter: blur(5px);
+    }
+
+    .content{
+    margin: 0 auto;
+    margin-top: 90px;
+    width: 37%;
+    }
 }
