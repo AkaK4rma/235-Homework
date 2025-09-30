@@ -32,8 +32,40 @@ div.tet {
     transform-origin: 0 0;
 }
 #z {
-    grid-column: 2/span 2;
+    grid-column: 2/span 3;
     grid-row: 2/span 3;
+}
+#l img {
+    transform:  translateY(305px) rotate(-90deg);
+    transform-origin: 0 0;
+}
+#l {
+    grid-column: 1/span 2;
+    grid-row: 3/span 3;
+}
+#t img {
+    transform:  translateX(300px) translateY(200px) rotate(180deg);
+    transform-origin: 0 0;
+}
+#t {
+    grid-column: 4/span 3;
+    grid-row: 5/span 2;
+}
+#j img {
+    transform:  translateX(300px) rotate(90deg);
+    transform-origin: 0 0;
+}
+#j {
+    grid-column: 4/span 3;
+    grid-row: 2/span 3;
+}
+#s img {
+    transform: translateX(305px) translateY(200px) rotate(180deg);
+    transform-origin: 0 0;
+}
+#s {
+    grid-column: 2/span 3;
+    grid-row: 5/span 3;
 }
 img {
     transition-property: transform;
