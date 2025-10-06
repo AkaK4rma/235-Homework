@@ -1,0 +1,91 @@
+/* Link states */
+a:link {
+    text-decoration: none;
+    color: blue;
+} 
+
+a:visited { 
+    color: rgb(73, 73, 120);
+}
+
+a:focus { 
+    outline: 2px solid #ffa500;
+}
+
+a:hover { 
+    color: darkblue;
+} 
+
+a:active { 
+    color: red;
+} 
+/* and four more */
+
+
+/* Header styling */
+header {
+    background-color: burlywood;
+    border: 2px solid gray;
+    text-align: center;
+    font-size: 1.5em;
+    padding: 20px;
+}
+
+/* Footer styling */
+footer {
+    background-color: dimgray;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+/* Main content */
+main {
+    padding: 20px;
+}
+
+img{
+    max-width: 500px;
+}
+
+/* Main content */
+em {
+    font-size: 1.2em;
+}
+
+/* Feel free to add any additional CSS rules that you need */
+
+/* Game list styling using flexbox or grid */
+.game-list {
+    display: flex;
+    flex-direction: column;
+}
+  
+.game {
+    text-align: center;
+    border: lightgray 1px solid;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: ghostwhite;
+}
+  
+.game h3 {
+    color: chocolate;
+}
+
+.game p{
+    text-align: center;
+}
+/* 
+I forgot how to do media query declarations :(
+
+@media only screen (max-width: 760px){
+    .game-list{
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .game {
+    width: 15%;
+}
+} */
