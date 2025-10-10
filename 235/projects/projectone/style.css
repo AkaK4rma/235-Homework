@@ -1,0 +1,286 @@
+body{
+    margin: 0;
+    font-family: "Bai Jamjuree", sans-serif;
+    background-color: #f6f75b;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-rows: 10vw auto 2fr;
+    grid-template-columns:4fr 1fr;
+    grid-template-areas: 
+    "header header"
+    "power power"
+    "maincontent side";
+}
+
+header{
+    background-color: #55518f;
+    display: flex;
+    align-items: center;
+    grid-area: header;
+}
+header h1{
+    padding: 10px;
+    padding-left: 30px;
+    color: #f6f75b;
+    font-family: "BBH Sans Bogle", sans-serif;
+    font-size: 5vw;
+    font-weight: 100;
+    transform: scale(1.2, 2);
+    white-space: nowrap;
+}
+
+header h2{
+    color: white;
+    font-family: "Bai Jamjuree", sans-serif;
+    font-size: 2.5vw;
+    font-weight: 500;
+    transform: scaleY(1.8);
+    line-height: 1;
+    align-self: flex-start;
+    width: 25vw;
+}
+
+#zelda{
+    align-self: flex-start;
+    height: 37vw;
+    width: 18vw;
+    object-fit: cover;
+    object-position: left;
+}
+
+#SonicGraphic{
+    align-self: start;
+    z-index: 2;
+    position: absolute;
+    right: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url(images/star2.png);
+    background-size: cover;
+    width: 20vw;
+    height: 20vw;
+}
+#SonicGraphic img{
+    height: 11.5vw;
+    width: 12.5vw;
+    top: 1vw;
+    object-fit: cover;
+    object-position: top;
+    position: absolute;
+}
+#SonicGraphic p{
+    background-color: #f6f75b;
+    border-top: 1px solid red;
+    font-family: "BBH Sans Bogle", sans-serif;
+    font-size: 2vw;
+    color: red;
+    bottom: 3vw;
+    width: 15vw;
+    height: 2.5vw;
+    text-align: center;
+    position: absolute;
+}
+
+#title, 
+main,
+aside{
+    background-color: #f6f75b;
+}
+
+#title{
+    grid-area: power;
+    z-index: 1;
+    line-height: 0;
+    font-family: "Hanken Grotesk", sans-serif;
+}
+#title div{
+    display: flex;
+}
+
+#title h2, #title h1{
+    color: red;
+    font-style: italic;
+    font-weight: 900;
+}
+
+#title h2{
+    margin: 0 4.5vw;
+    padding-top: 7.5vw;
+    font-size: 12vw;
+}
+#title h1{
+    margin: 13.5vw 1vw;
+    margin-bottom: 10%;
+    font-size: 28vw;
+}
+
+#title div img{
+    width: 40vw;
+    height: 10vw;
+    transform: skewX(-8deg) translate(-5vw, 2.5vw) scale(1, .9);
+}
+
+aside{
+    grid-area: side;
+    display: flex;
+    flex-direction: column;
+}
+
+#plus{
+    margin: 0;
+    color: red;
+    text-align: center;
+    font-weight:900;
+    font-size: 20vw;
+    line-height: 50%;
+    word-spacing: -1px;
+}
+
+aside div h1{
+    color: black;
+    font-size: 16px;
+}
+
+.content-container{
+    grid-area: maincontent;
+}
+
+#sidetext{
+    width: 85%;
+}
+
+#sidetext p{
+    text-align: right;
+    font-size: 1.75vw;
+    font-weight: 500;
+    transform: scale(.85, 1.2);
+}
+
+.content{
+    padding: 1.25vw;
+    letter-spacing: -1.75px;
+    width: 50%;
+}
+
+.content h3, .content h4, .content p{
+    transform: scale(.8, 1.2) translateX(-4vw);
+}
+
+#cSonic{
+    float: left;
+    position: absolute;
+    right: 15vw;
+    z-index: 2;
+    width: 57%;
+    transform: translate(-3vw, -5vw);
+}
+
+.content h3{
+    color: red;
+    font-size: 3.5vw;
+    font-style: italic;
+    text-align: left;
+    font-weight: 700;
+}
+
+.content li::marker{
+    color: red;
+    font-size: 2.5em;
+    content: "▶";
+}
+
+.content li p{
+    width: 20vw;
+    margin-left: 3vw;
+    font-size: 2.75vw;
+    font-weight: 650;
+    transform: scale(.9, 1.2) translateX(-30px);
+}
+
+.content h4{
+    font-size: 3vw;
+    margin: 0;
+    font-weight: 500;
+    line-height: .75;
+}
+
+.content h4 strong{
+    font-size: 1.75em;
+    font-weight: 700;
+}
+
+.content h2, .content h1{
+    color:#55518f;
+    margin: 0;
+    padding: 0;
+    line-height: .8;
+}
+
+.content h1{
+    font-size: 15vw;
+}
+
+.content h2{
+    font-size: 6.75vw;
+}
+
+.content h5{
+    font-size: 2.5vw;
+    font-weight: 500;
+}
+
+#flavor-text{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-size: .8vw;
+    width: 7vw;
+    color: red;
+    right: 15vw;
+    letter-spacing: normal;
+    z-index: 2;
+    transform: scale(.8, 1.1) translateY(-15vw);
+}
+
+#flavor-text img{
+    width: 40%;
+    margin: 0;
+    transform: translateX(-3vw);
+}
+
+.graphic{
+    padding-top: 2vw;
+    width: 70%;
+    margin: 0 1.8vw;
+}
+
+.graphic img{
+    width: 100%;
+}
+
+#gText{
+    display: flex;
+    align-items: center;
+}
+
+
+#gText h2, #gText h3{
+    font-size: 1vw;
+    text-align: center;
+    color: white;
+    margin: 0;
+}
+#gText h2{
+    background-color: #2f2d2d;
+    flex-grow: 1;
+}
+
+#gText h3{
+    background-color: #787474;
+    flex-grow: 1;
+}
+

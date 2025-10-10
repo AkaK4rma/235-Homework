@@ -4,61 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project One</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Bogle&family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Hanken+Grotesk:ital,wght@1,900&family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>EPIC REVIEW!</h1>
-        <img src="images/link.png" alt="">
-        <div id="SonicGraphic">
-            <img src="images/sonic.png" alt="">
-            <p>COVER 2 OF 2</p>
-        </div>
-    </header>
-    <main>
+    <section class="wrapper">
+        <header>
+            <h1>EPIC REVIEW!</h1>
+            <img id="zelda" src="images/link.png" alt="">
+            <h2>The Legend of Zelda: Ocarina of Time 3D</h2>
+            <div id="SonicGraphic">
+                <img src="images/sonic.png" alt="">
+                <p>COVER 2 OF 2</p>
+            </div>
+        </header>
         <div id="title">
             <div>
-                <h2>Nintendo</h2>
+                <h2>NINTENDO</h2>
                 <img src="images/powerlines.png" alt="">
             </div>
-            <h1>Power</h1>
+            <h1>POWER</h1>
         </div>
-
-        <aside>
-            <h1>+</h1>
-            <p>Wii PLAY: MOTIOn</p>
-            <p>MARIO & SONIC AT THE LONDON 2021 OLYMPIC GAMES</p>
-            <p>BLAZBLUE: CONTINUUM SHIFT II</p>
-            <p>CAVE STORY 3D</p>
-            <p>LEGO PIRATES OF THE CARIBBEAN</p>
-            <div class="graphic">
-                <div>
-                    <p>JUNE 2011</p>
-                    <p>V268</p>
+        <main>
+            <div class="content-container">
+                <div class="content">
+                    <img id="cSonic" src="images/classicsonic2.png" alt="">
+                    <h3>CLASSIC REVIVALS:</h3>
+                    <ul>
+                        <li><p>SHINOBI</p></li>
+                        <li><p>MEGA MAN LEGENDS 3</p></li>
+                    </ul>
+                    <br>
+                    <h4>10 YEARS OF  <br><strong>GAME BOY ADVANCE</strong><br>PG. 64</h4>
+                    <br>
+                    <h5>The Blue Blur speeds onto Nintendo 3DS in an anniversary event 20 years in the making:</h5>
+                    <div>
+                        <h1>SONIC</h1>
+                        <h2>GENERATIONS</h2>
+                    </div>
+                    <div id="flavor-text">
+                        <img src="images/arrow.png" alt="">
+                        <p>Play as both <strong>Classic Sonic</strong> and Modern Sonic!</p>
+                    </div>
                 </div>
-                <div id="logo">
-                    <h1>Future</h1>
-                    <p>MEDIA WITH PASSION</p>
-                </div>
-                <img src="barcode" alt="">
             </div>
+        </main>
+        <aside>
+                <h1 id="plus">+</h1>
+                <div id="sidetext">
+                    <p>Wii PLAY: MOTION</p>
+                    <p>MARIO & SONIC AT THE LONDON 2012 OLYMPIC GAMES</p>
+                    <p>BLAZBLUE: CONTINUUM SHIFT II</p>
+                    <p>CAVE STORY 3D</p>
+                    <p>LEGO PIRATES OF THE CARIBBEAN</p>
+                </div>
+                <div class="graphic">
+                    <div id="gText">
+                        <h2>JUNE 2011</h2>
+                        <h3>V268</h3>
+                    </div>
+                    <!-- <div id="logo">
+                        <h1>Future</h1>
+                        <p>MEDIA WITH PASSION</p>
+                    </div> -->
+                    <img src="images/graphic.png" alt="">
+                </div>
         </aside>
-
-        <div class="content-container">
-            <h3>CLASSIC REVIVALS</h3>
-            <ul>
-            <li>SHINOBI</li>
-            <li>MEGA MAN LEGENDS 3</li>
-            </ul>
-            <h4>10 YEARS OF <strong>GAME BOY ADVANCE</strong> PG. 64</h4>
-            <p>The Blue Blur speeds onto Nintendo 3DS in an anniversary event 20 years in the making:</p>
-            <h1>Sonic</h1>
-            <h2>Generations</h2>
-            <img src="images/classicsonic.png" alt="">
-        </div>
-        <div id="flavor-text">
-            <img src="images/arrow.png" alt="">
-            <p>Play as both <strong>Classic Sonic</strong> and Modern Sonic!</p>
-        </div>
-    </main>
+    </section>
 </body>
 </html>
