@@ -1,0 +1,53 @@
+/* Do everything in this file */
+h1, h2, h3, h4, h5, h6{
+    border-bottom: 1px red solid;
+}
+figure{
+    float:right;
+    max-width: 650px;
+    margin: 0 auto;
+}
+figure img{
+    width: 100%;
+}
+h2{
+    clear: both;
+}
+div img{
+    width: 35%;
+}
+#tetlist{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#tetlist div{
+    flex: 1 0 450px;
+    text-align: center;
+}
+
+#tetlist img{
+    width: 60%;
+}
+
+#tetlist .tet-long img{
+    width: 80%;
+}
+#tetlist .tet-square img{
+    width: 40%;
+}
+
+#tetlist span{
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#tetlist .aliases{
+    text-align: left;
+    margin: 1em;
+}
+
+main, header, footer{
+    width: 90%;
+}
