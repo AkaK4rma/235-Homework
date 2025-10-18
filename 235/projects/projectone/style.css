@@ -59,7 +59,7 @@ header h2{
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-image: url(images/star2.png);
+    background-image: url(media/star2.png);
     background-size: cover;
     width: 20vw;
     height: 20vw;
