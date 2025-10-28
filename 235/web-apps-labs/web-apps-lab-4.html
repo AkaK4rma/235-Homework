@@ -32,6 +32,15 @@
 let colors = ["red","green","blue","purple","pink"];
 let foods = ["arroz con habichuela", "empanadas de carne", "carne/pollo guisada"]; // add some foods
 
+function createList(listElement, array){
+  for(let i = 0; i < array.length; i++)
+    {
+        // document.querySelector("#colorsList").innerHTML += "<li>" + colors[i] + "</li>";
+        let a = document.querySelector(listElement).appendChild(document.createElement("li"));
+        a.innerHTML = array[i];
+    }
+}
+
 // Optional - can you figure out how to pull both the key AND the value
 // from the `links` object literal?
 let links = {
@@ -40,18 +49,9 @@ let links = {
 		"New Media Club" : "http://newmediaclub.cias.rit.edu"
 	}
 
-    for(let i = 0; i < colors.length; i++)
-    {
-        // document.querySelector("#colorsList").innerHTML += "<li>" + colors[i] + "</li>";
-        let a = document.querySelector("#colorsList").appendChild(document.createElement("li"));
-        a.innerHTML = colors[i];
-    }
+    createList("#colorsList", colors);
+    createList("#foodsList", foods);
 
-    for(let n of foods){
-        // document.querySelector("#foodsList").innerHTML += "<li>" + n + "</li>";
-        let a = document.querySelector("#foodsList").appendChild(document.createElement("li"));
-        a.innerHTML = n;
-    }
 
     for(let key in links){
         let a = document.querySelector("#linksList").appendChild(document.createElement("li"));
