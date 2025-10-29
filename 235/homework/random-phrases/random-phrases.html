@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random phrases</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>random phrases site</h1>
+    </header>
+    <main>
+        <div class="container">
+            <div id= "title">
+                <h2>Flyin high</h2>
+            </div>
+            <div id="block"> </div>
+            <div id="phrase">
+                <h3>insert text here</h3>
+            </div>
+            <div id="block2"> </div>
+            <button>
+                    <span class="button_top"> Button </span>
+            </button>
+            <div id="block2"> </div>
+            <p>&copy 2025 Gabriel Roddy</p>
+        </div>
+    </main>
+    <script>
+        "use strict";
+        let h3 = document.querySelector("h3");
+        let button = document.querySelector("button")
+        let phrases = ["Where the cluck am I?", "So... that weather", "I'm a free bird", "And they said chickens couldn't fly", "This is gonna go hard on 'doodle doo"]
+        let r = Math.floor(Math.random() * phrases.length);
+
+        h3.innerHTML = phrases[r];
+
+        function randomNum(){
+            let b = Math.floor(Math.random() * phrases.length);
+            return b;
+        }
+
+        function displayQuote(){
+            let a;
+            do{
+                a = randomNum();
+            }while(r === a);
+            r = a;
+            h3.innerHTML = phrases[a];
+        }
+
+        button.onclick = displayQuote;
+    </script>
+</body>
+</html>

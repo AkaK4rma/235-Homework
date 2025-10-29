@@ -1,0 +1,120 @@
+
+header{
+    text-align: center;
+    height: 10vh;
+}
+
+main{
+    display: grid;
+    place-items: center;
+    height: 60vh;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(media/hjjp1rjipumb1.jpg);
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    background-size: cover;
+    height: 50vh;
+    width: 30vw;
+    border-radius: 10px;
+}
+
+div div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#title{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: rgba(200, 100, 100 ,.5);
+}
+
+#block{
+    height: 30%;
+}
+#block2{
+    height: 10%;
+}
+
+#phrase{
+    padding: 2vh 0;
+    background-color: rgba(10, 10, 10 ,.5);
+}
+
+h3,
+h2, 
+p{
+    font-family: "Rubik", sans-serif;
+    color: white;
+}
+
+
+h1,
+h3{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* From Uiverse.io by Voxybuns */ 
+button {
+  /* Variables */
+  --button_radius: 0.75em;
+  --button_color: #e8e8e8;
+  --button_outline_color: #000000;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--button_radius);
+  background: var(--button_outline_color);
+  padding: 0;
+}
+
+.button_top {
+    font-family: "Rubik", sans-serif;
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid var(--button_outline_color);
+    border-radius: var(--button_radius);
+    padding: 0.75em 1.5em;
+    background: var(--button_color);
+    color: var(--button_outline_color);
+    transform: translateY(-0.2em);
+    transition: transform 0.1s ease;
+}
+
+button:hover .button_top {
+  /* Pull the button upwards when hovered */
+  transform: translateY(-0.33em);
+}
+
+button:active .button_top {
+  /* Push the button downwards when pressed */
+  transform: translateY(0);
+}
+
+@media only screen and (max-width: 600px) {
+    .container{
+        height: 50vh;
+        width: 90%;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+    .container{
+        height: 50vh;
+        width: 60%;
+    }
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1300px) {
+    .container{
+        height: 50vh;
+        width: 40%;
+    }
+}
