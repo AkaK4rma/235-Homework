@@ -182,11 +182,58 @@
                 <h2>projects</h2>
                 <div class="project">
                     <div class="proj-row first-row">
+                        <p><strong>Tetris Grid</strong></p>
+                        <p><strong>SEPT. 30 2025</strong></p>
+                    </div>
+                    <div class="proj-row">
+                        <p><a href="TetrisGrid/tetris-grid.html">View Project</a></p>
+                        <p>IMGE 235</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="project">
+                    <div class="proj-row first-row">
                         <p><strong>Basic Game</strong></p>
                         <p><strong>SEPT. 12 2025</strong></p>
                     </div>
                     <div class="proj-row">
-                        <p><a href="https://people.rit.edu/gar5854/235/homework/basicgame.html">View Project</a></p>
+                        <p><a href="homework/basicgame.html">View Project</a></p>
+                        <p>IMGE 235</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="project">
+                    <div class="proj-row first-row">
+                        <p><strong>Web Apps</strong></p>
+                        <p><strong>OCT. 26 - NOV. 1 2025</strong></p>
+                    </div>
+                    <div class="proj-row">
+                        <div class="proj-col">
+                            <p><a id="dropdown">View Projects</a></p>
+                            <ul>
+                                    <li><a href="web-apps-labs/web-apps-lab-1.html"> Lab 1</a></li>
+                                    <li><a href="web-apps-labs/web-apps-lab-2.html"> Lab 2</a></li>
+                                    <li><a href="web-apps-labs/web-apps-lab-3.html"> Lab 3</a></li>
+                                    <li><a href="web-apps-labs/web-apps-lab-4.html"> Lab 4</a></li>
+                                    <li><a href="web-apps-labs/web-apps-lab-5.html"> Lab 5</a></li>
+                                    <li><a href="web-apps-labs/web-apps-lab-5-checkboxes.html"> Lab 5+</a></li>
+                                    <li><a href="web-apps-labs/web-apps-lab-6.html"> Lab 6</a></li>
+                                    <li><a href="web-apps-labs/web-apps-lab-7.html"> Lab 7</a></li>
+                                    <li><a href="web-apps-labs/web-apps-lab-8.html"> Lab 8</a></li>
+                                    <li><a href="web-apps-labs/web-apps-lab-9.html"> Lab 9</a></li>
+                            </ul>
+                        </div>
+                        <p>IMGE 235</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="project">
+                    <div class="proj-row first-row">
+                        <p><strong>Tetris Grid</strong></p>
+                        <p><strong>SEPT. 30 2025</strong></p>
+                    </div>
+                    <div class="proj-row">
+                        <p><a href="TetrisGrid/tetris-grid.html">View Project</a></p>
                         <p>IMGE 235</p>
                     </div>
                 </div>
@@ -251,5 +298,21 @@
         </div>
     </footer>
 </body>
+
+<script>
+    let webapps = document.querySelector(".proj-col ul");
+    let webappbutton = document.querySelector("#dropdown");
+    webapps.style.display = "none";
+
+    webappbutton.onclick = function drowdown(){
+        if(webapps.style.display === "none"){
+            webapps.style.display = "initial";
+        }
+        else{
+            webapps.style.display = "none";
+        }
+    }
+
+</script>
 
 </html>

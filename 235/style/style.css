@@ -409,6 +409,24 @@ a:visited .button  {
   width: 90%;
 }
 
+.proj-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.proj-col ul{
+  margin: 0 1vw;
+}
+.proj-col li::marker{
+  content: "> ";
+}
+
+.proj-col li{
+  padding: 3px 2px;
+}
+
 .first-row {
   transition: .5s ease;
 }
@@ -421,6 +439,10 @@ a:visited .button  {
 
 .proj-row p {
   margin: 5px;
+}
+
+#dropdown{
+  cursor: pointer;
 }
 
 .proj-row a {
