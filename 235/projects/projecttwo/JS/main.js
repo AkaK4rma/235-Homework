@@ -3,18 +3,47 @@ window.onload = (e) => { document.querySelector("#search").onclick = searchButto
 
 // 2
 let displayTerm = "";
+let manga = false;
+
+let legend = document.querySelector("legend");
+let information = document.querySelector("#info");
+let infoWords = information.innerHTML;
+let animan = document.querySelectorAll("#AniMan p input");
+let poprate = document.querySelectorAll("#PopRate p input");
+let year = document.querySelectorAll("#year p input");
+let button = document.querySelector("button");
+
+
+    for(let i of animan){
+        i.onchange = function(e){
+            information.innerHTML = (Boolean(e.target.value)) ? infoWords + "anime " : infoWords + "manga ";
+        }
+    }
+
+    
+
+    for(let i of animan){
+        i.onchange = function(e){
+            information.innerHTML = (Boolean(e.target.value)) ? infoWords + "anime " : infoWords + "manga ";
+        }
+    }
+
+    // button.onclick = function(e){
+    //     for(let i of input){
+    //         if(i.checked){
+    //             information.innerHTML = `Your FINAL CHOICE is \"${i.value}\"!`;
+    //         }
+    //     }
+    // }
 
 // 3
 function searchButtonClicked() {
+
     console.log("searchButtonClicked() called");
 
-    const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
-
-    let GIPHY_KEY = "5PuWjWVnwpHUQPZK866vd7wQ2qeCeqg7";
-
-    let url = GIPHY_URL;
-    url += "api_key=" + GIPHY_KEY;
-
+    const JIKAN_URL = "https://api.jikan.moe/v4/";
+    let url = (manga) ? JIKAN_URL + "anime" : JIKAN_URL + "manga";
+    
     let term = document.querySelector("#searchterm").value;
     displayTerm = term;
 
