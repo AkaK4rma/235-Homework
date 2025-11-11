@@ -22,17 +22,21 @@
 	<hr>
 	<legend>Choose what category</legend>
 	<div id="PopRate">
-		<p><input type="radio" name="poprate" id="Pop" value="true" /> Popularity</p>
-		<p><input type="radio" name="poprate" id="Rate" value="green" /> Rating</p>
-		<p><input type="radio" name="poprate" id="Score"> Score</p>
+		<p><input type="radio" name="poprate" id="Pop" value="Popularity" /> Popularity</p>
+		<p><input type="radio" name="poprate" id="Rate" value="Rating" /> Rating</p>
+		<p><input type="radio" name="poprate" id="Score" value="Score"> Score</p>
 	</div>
 	<hr>
 	<legend>Type your starting year (leave blank if you don't want to limit by year)</legend>
 	<div id="year">
 		<p>Year <input type="text" name="year" id="Year" value="" /></p>
+		<p id="warn"></p>
 	</div>
 	<hr>
 	<p id="info">You will play based on: </p>
+	<p id="ani">Type: </p>
+	<p id="cat">Category: </p>
+	<p id="yr">Year: </p>
 </div>
 
 <div class="widgets">

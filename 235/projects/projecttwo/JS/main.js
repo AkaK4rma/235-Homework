@@ -6,27 +6,45 @@ let displayTerm = "";
 let manga = false;
 
 let legend = document.querySelector("legend");
-let information = document.querySelector("#info");
-let infoWords = information.innerHTML;
 let animan = document.querySelectorAll("#AniMan p input");
 let poprate = document.querySelectorAll("#PopRate p input");
-let year = document.querySelectorAll("#year p input");
+let year = document.querySelector("#year p input");
 let button = document.querySelector("button");
+let anime = document.querySelector("#ani");
+let animeStart = anime.innerHTML;
+let category = document.querySelector("#cat");
+let categoryStart = category.innerHTML;
+let yearVal = document.querySelector("#yr");
+let warning = document.querySelector("#warn");
+let yearStart = yearVal.innerHTML;
+let yearBool = true;
 
 
     for(let i of animan){
         i.onchange = function(e){
-            information.innerHTML = (Boolean(e.target.value)) ? infoWords + "anime " : infoWords + "manga ";
+            anime.innerHTML = (e.target.value) ? animeStart + "Anime " : animeStart + "Manga ";
         }
     }
 
     
 
-    for(let i of animan){
+    for(let i of poprate){
         i.onchange = function(e){
-            information.innerHTML = (Boolean(e.target.value)) ? infoWords + "anime " : infoWords + "manga ";
+            category.innerHTML = categoryStart + e.target.value;
         }
     }
+    
+    year.addEventListener("input", (event) => {
+        yearVal.innerHTML = yearStart + event.target.value
+        yearBool = true;
+        warning.innerHTML = ""
+        if(parseInt(year.value) >= 2025 || parseInt(year.value) <= 1907){
+            yearBool = false;
+            warning.style.color = "red";
+            warning.innerHTML = "You must enter a value between 1907 and 2025"
+        }
+    });
+    
 
     // button.onclick = function(e){
     //     for(let i of input){
