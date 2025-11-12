@@ -23,20 +23,25 @@
 	<legend>Choose what category</legend>
 	<div id="PopRate">
 		<p><input type="radio" name="poprate" id="Pop" value="Popularity" /> Popularity</p>
-		<p><input type="radio" name="poprate" id="Rate" value="Rating" /> Rating</p>
+		<p><input type="radio" name="poprate" id="Rate" value="Rank" /> Rank</p>
 		<p><input type="radio" name="poprate" id="Score" value="Score"> Score</p>
 	</div>
 	<hr>
 	<legend>Type your starting year (leave blank if you don't want to limit by year)</legend>
 	<div id="year">
-		<p>Year <input type="text" name="year" id="Year" value="" /></p>
+		<p>Start Year <input type="text" name="year" id="Year" value="" /></p>
 		<p id="warn"></p>
+	</div>
+	<div id="year2">
+		<p>End Year <input type="text" name="year" id="Year" value="" /></p>
+		<p id="warn2"></p>
 	</div>
 	<hr>
 	<p id="info">You will play based on: </p>
 	<p id="ani">Type: </p>
 	<p id="cat">Category: </p>
-	<p id="yr">Year: </p>
+	<p id="yr">Start Year: </p>
+	<p id="yr2">End Year: </p>
 </div>
 
 <div class="widgets">
@@ -44,6 +49,10 @@
 </div>
 <div id="status"></div>
 <hr>
+
+<div id="content">
+	<p>No data yet!</p>
+</div>
 </body>
 <script src="JS/main.js"></script>
 </html>
