@@ -4,57 +4,70 @@
 	<meta charset="utf-8" />
  	<title>Project 2</title>
  	<link rel="stylesheet" href="style/style.css">
+	<script type="module">
+        import { fairyDustCursor } from "https://unpkg.com/cursor-effects@latest/dist/esm.js";
+        fairyDustCursor({
+            colors: ["#9ED8DB", "#467599", "#1D3354"],
+            fairySymbol: "+"
+        });
+    </script>
 </head>
 
 
 <body>
-<header>
-	<h1>Higher or Lower</h1>
-</header>
+	<div id="test">
+	<div id="menu">
+		<header>
+			<h1>Higher or Lower</h1>
+		</header>
 
 
-<div id="parameters">
-	<div class="container">
-		<h3>Choose the game's parameters!</h3>
-		<legend>Would you like to play based on Anime or Manga</legend>
-		<div id="AniMan">
-			<p><input type="radio" name="animan" id="Anime" value="true" /> Anime</p>
-			<p><input type="radio" name="animan" id="Manga" value="" /> Manga</p>
+		<div id="parameters">
+			<div class="container">
+				<h3>Choose the game's parameters!</h3>
+				<legend>Would you like to play based on Anime or Manga</legend>
+				<div id="AniMan">
+					<p><input type="radio" name="animan" id="Anime" value="true" /> Anime</p>
+					<p><input type="radio" name="animan" id="Manga" value="" /> Manga</p>
+				</div>
+				<hr>
+				<legend>Choose what category</legend>
+				<div id="PopRate">
+					<p><input type="radio" name="poprate" id="Pop" value="Popularity" /> Popularity (MAL Popularity)</p>
+					<p><input type="radio" name="poprate" id="Rate" value="Rank" /> Rank (MAL Rank)</p>
+					<p><input type="radio" name="poprate" id="Score" value="Score"> Score (1-10 / 10)</p>
+				</div>
+				<hr>
+				<legend>Type the year range (leave blank if you don't want to limit by year)</legend>
+				<div id="year">
+					<p>Start Year <input type="text" name="year" id="Year" value="" /></p>
+					<p id="warn"></p>
+				</div>
+				<div id="year2">
+					<p>End Year <input type="text" name="year" id="Year" value="" /></p>
+					<p id="warn2"></p>
+				</div>
+				<hr>
+				<p id="info">You will play based on: </p>
+				<p id="ani">Type: </p>
+				<p id="cat">Category: </p>
+				<p id="yr">Start Year: </p>
+				<p id="yr2">End Year: </p>
+			</div>
 		</div>
-		<hr>
-		<legend>Choose what category</legend>
-		<div id="PopRate">
-			<p><input type="radio" name="poprate" id="Pop" value="Popularity" /> Popularity (MAL Popularity)</p>
-			<p><input type="radio" name="poprate" id="Rate" value="Rank" /> Rank (MAL Rank)</p>
-			<p><input type="radio" name="poprate" id="Score" value="Score"> Score (1-10 / 10)</p>
+
+		<div class="widgets">
+			<button type="button" id="search" class="green">Press to Play!</button>
 		</div>
-		<hr>
-		<legend>Type the year range (leave blank if you don't want to limit by year)</legend>
-		<div id="year">
-			<p>Start Year <input type="text" name="year" id="Year" value="" /></p>
-			<p id="warn"></p>
-		</div>
-		<div id="year2">
-			<p>End Year <input type="text" name="year" id="Year" value="" /></p>
-			<p id="warn2"></p>
-		</div>
-		<hr>
-		<p id="info">You will play based on: </p>
-		<p id="ani">Type: </p>
-		<p id="cat">Category: </p>
-		<p id="yr">Start Year: </p>
-		<p id="yr2">End Year: </p>
+	</div>
+	<div id="content">
+		<p>No data yet!</p>
+	</div>
+
+	<div id="backButton">
+		<button type="button">Back</button>
 	</div>
 </div>
-
-<div class="widgets">
-	<button type="button" id="search" class="green">Press to Play!</button>
-</div>
-<div id="status"></div>
-<hr>
-
-<div id="content">
-	<p>No data yet!</p>
 </div>
 </body>
 <script src="JS/main.js"></script>

@@ -2,9 +2,21 @@
   font-family: verdana, tahoma, sans-serif;
 }
 
+body{
+  margin: 0;
+  background-image: 
+  radial-gradient(circle, rgba(139,92,246,0.6) 1px, transparent 1px),
+  radial-gradient(circle, rgba(59,130,246,0.4) 1px, transparent 1px),
+  radial-gradient(circle, rgba(236,72,153,0.5) 1px, transparent 1px);
+  background-size: 20px 20px, 60px 60px;
+  height: 100vh;
+  background-position: 0 0, 10px 10px, 30px 30px;
+}
+
+
+
 header {
   /* background: url(../images/cats.jpg); */
-  height: 195px;
 }
 
 header h1 {
@@ -12,7 +24,6 @@ header h1 {
   color: blue;
   text-align: center;
   font-size: 100px;
-  padding-top: 35px;
 }
 
 #status {
@@ -20,24 +31,40 @@ header h1 {
 }
 
 #content {
-  display: grid;
+  display: none;
+  place-items: center;
+  height: 100vh;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 50px 10px;
 }
 
-#content .result {
+#backButton {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.result {
   display: flex;
+  width: 49vw;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.result span {
-  order: -1;
+.result-inner {
+  padding: 30px;
+  padding-bottom: 0;
+  border-radius: 10px;
 }
+
 
 .result img {
   box-shadow: 0 15px 17px -7px rgba(0, 0, 0, 0.6);
   transition: .5s ease;
   border-radius: 10px;
+  max-height: 80vh;
+  min-width: 50%;
 }
 
 .result img:hover {
@@ -51,10 +78,11 @@ header h1 {
   display: block;
 }
 
+
 .result audio {
   width: 130px;
 }
-*/ button {
+* button {
   display: inline-block;
   cursor: pointer;
   border-style: solid;
@@ -68,9 +96,11 @@ header h1 {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   font-family: sans-serif;
   text-decoration: none;
+  padding: 10px;
 }
 
 button.green {
+  margin-top: 10px;
   border-color: #8fc800;
   background: #8fc800;
   background: linear-gradient(top, #8fc800 0%, #438c00 100%);
@@ -90,8 +120,14 @@ button:focus {
 }
 
 .widgets {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.container{
+  border-radius: 10px;
+  background-color: wheat;
+  padding: 0 20px;
 }
 
 .container h3{
