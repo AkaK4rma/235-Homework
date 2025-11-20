@@ -37,6 +37,21 @@ header h1 {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
+#fader{
+  display: none;
+  position: absolute;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  background-color: #a031bc;
+}
+
+#fader p{
+  opacity: 0;
+  color: white;
+}
+
 #backButton {
   display: none;
   position: absolute;
@@ -65,6 +80,7 @@ header h1 {
   border-radius: 10px;
   max-height: 80vh;
   min-width: 50%;
+  cursor: pointer;
 }
 
 .result img:hover {
@@ -138,6 +154,17 @@ button:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+
+@keyframes upcome{
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, -100%, 0);
+  }
 }
 
 @keyframes fadein{

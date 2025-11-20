@@ -30,8 +30,8 @@ let searchedURL;
 for (let i of animan) {
   i.onchange = function (e) {
     anime.innerHTML = e.target.value
-      ? (animeStart + "Anime ", (manga = false))
-      : (animeStart + "Manga ", (manga = true));
+      ? ((manga = false), animeStart + "Anime ")
+      : ((manga = true), animeStart + "Manga ");
   };
 }
 
@@ -124,16 +124,41 @@ year2.addEventListener("input", (event) => {
 function backButton() {
   document.querySelector("#menu").style.display = "initial";
   document.querySelector("#content").style.display = "none";
+  document.querySelector("#fader").style.display = "none";
   document.querySelector("#backButton").style.display = "none";
 }
 
-function searchButtonClicked() {
-
+async function searchButtonClicked() {
+  document.querySelector("#menu").style.display = "none";
   document.querySelector("#backButton").style.display = "inline";
   document.querySelector("#content").style.display = "grid";
+  document.querySelector("#content").innerHTML = "";
+  document.querySelector("#fader").style.display = "grid";
+  document.querySelector("#fader p").style.opacity = 0;
+  document.querySelector("#fader p").innerHTML = "Loading";
 
-  document.querySelector("#content").innerHTML = "<p>No data yet!</p>";
-  console.log("searchButtonClicked() called");
+  document.querySelector("#fader").animate([
+  {transform: "translate3d(0, -100%, 0)"},
+  {transform: "translate3d(0, 0, 0)"}
+  ], {
+  duration: 500,
+  easing: 'ease-out',
+  iterations: 1,
+  direction: 'alternate'
+  });
+
+  document.querySelector("#fader p").animate([
+  {opacity: "0"},
+  {opacity: "1"}
+  ], {
+  delay: 500,
+  duration: 500,
+  easing: 'ease-out',
+  iterations: 1,
+  direction: 'alternate'
+  });
+  await delay(500);
+  document.querySelector("#fader p").style.opacity = 1;
 
   const JIKAN_URL = "https://api.jikan.moe/v4/";
   let url = manga ? JIKAN_URL + "manga" : JIKAN_URL + "anime";
@@ -171,8 +196,6 @@ function searchButtonClicked() {
       break;
   }
   url += type;
-
-  document.querySelector("#menu").style.display = "none";
   console.log(url);
   searchedURL = url;
   // 12 Request data!
@@ -225,7 +248,7 @@ async function dataLoaded(e) {
     rand = Math.floor(Math.random() * (results.length - 1 + 1) + 1);
     let result = results[rand];
     let imageUrl = "../images/no-image-found.png";
-    if (result.images) imageUrl = result.images.jpg.large_image_url;
+    if (result.images != null) imageUrl = result.images.jpg.large_image_url;
     
 
     let rating = result.rating;
@@ -264,6 +287,18 @@ async function dataLoaded(e) {
     bigString += line;
   }
   document.querySelector("#content").innerHTML = bigString;
+  await delay(500);
+  document.querySelector("#fader p").innerHTML = "Loaded";
+  document.querySelector("#fader").animate([
+  {opacity: "1"},
+  {opacity: "0"}
+  ], {
+  duration: 500,
+  easing: 'ease-out',
+  direction: 'alternate'
+  });
+  await delay(500);
+  document.querySelector("#fader").style.display = "none";
 }
 
 function dataError(e) {
