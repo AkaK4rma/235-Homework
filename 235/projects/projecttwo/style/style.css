@@ -13,6 +13,9 @@ body{
   background-position: 0 0, 10px 10px, 30px 30px;
 }
 
+.container span{
+  opacity: 0;
+}
 
 
 header {
@@ -94,6 +97,10 @@ header h1 {
   display: block;
 }
 
+#warningnign{
+  color: red;
+  display: none;
+}
 
 .result audio {
   width: 130px;

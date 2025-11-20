@@ -6,7 +6,7 @@ window.onload = (e) => {
 
 // 2
 let manga = false;
-
+let spans = document.querySelectorAll(".container span");
 let legend = document.querySelector("legend");
 let animan = document.querySelectorAll("#AniMan p input");
 let poprate = document.querySelectorAll("#PopRate p input");
@@ -17,6 +17,8 @@ let anime = document.querySelector("#ani");
 let animeStart = anime.innerHTML;
 let category = document.querySelector("#cat");
 let categoryStart = category.innerHTML;
+let gamemode = "";
+let picked = false;
 let yearVal = document.querySelector("#yr");
 let yearVal2 = document.querySelector("#yr2");
 let warning = document.querySelector("#warn");
@@ -27,17 +29,45 @@ let yearBool = false;
 let yearBool2 = false;
 let searchedURL;
 
+let score;
+let rank;
+let popularity;
+let score2;
+let rank2;
+let popularity2;
+let higher;
+
+async function loadMenu() {
+  for (let i = 0; i < spans.length; i++) {
+    spans[i].style.opacity = 0;
+    spans[i].animate([{ opacity: "0" }, { opacity: "1" }], {
+      delay: 200 * (i + 1),
+      duration: 200,
+      iterations: 1,
+      direction: "alternate",
+    });
+    await delay(190 + (200 * (i + 1)));
+    spans[i].style.opacity = 1;
+  }
+}
+loadMenu();
+
+yearVal.innerHTML = yearStart + "1907";
+yearVal2.innerHTML = yearStart2 + "2027";
+
 for (let i of animan) {
   i.onchange = function (e) {
     anime.innerHTML = e.target.value
       ? ((manga = false), animeStart + "Anime ")
       : ((manga = true), animeStart + "Manga ");
+    picked = true;
   };
 }
 
 for (let i of poprate) {
   i.onchange = function (e) {
     category.innerHTML = categoryStart + e.target.value;
+    gamemode = e.target.value;
   };
 }
 
@@ -78,17 +108,23 @@ year.addEventListener("input", (event) => {
     if (
       parsedInt > 2027 ||
       parsedInt < 1907 ||
-      (parsedInt.toString() != year.value && year.value.length >= 4)
+      (parsedInt.toString() != year.value &&
+        year.value.length >= 4 &&
+        parsedInt.length >= 1)
     ) {
       yearBool = false;
       warning.style.color = "red";
       warning.innerHTML = "You must enter a value between 1907 and 2027";
+      yearVal.style.color = "red";
+      yearVal.innerHTML = yearStart + "Year Must Satisfy Conditions";
     }
   } else {
     yearVal.innerHTML = yearStart;
     yearBool = false;
     warning.style.color = "black";
     warning.innerHTML = "";
+    yearVal.style.color = "black";
+    yearVal.innerHTML = yearStart + "1907";
   }
 });
 
@@ -107,17 +143,23 @@ year2.addEventListener("input", (event) => {
     if (
       parsedInt > 2027 ||
       parsedInt < 1907 ||
-      (parsedInt.toString() != year2.value && year2.value.length >= 4)
+      (parsedInt.toString() != year2.value &&
+        year2.value.length >= 4 &&
+        parsedInt.length >= 1)
     ) {
       yearBool2 = false;
       warning2.style.color = "red";
       warning2.innerHTML = "You must enter a value between 1907 and 2027";
+      yearVal2.style.color = "red";
+      yearVal2.innerHTML = yearStart2 + "Year Must Satisfy Conditions";
     }
   } else {
     yearVal2.innerHTML = yearStart2;
     yearBool2 = false;
     warning2.style.color = "black";
     warning2.innerHTML = "";
+    yearVal2.style.color = "black";
+    yearVal2.innerHTML = yearStart2 + "2027";
   }
 });
 
@@ -129,6 +171,23 @@ function backButton() {
 }
 
 async function searchButtonClicked() {
+  if (warning2.style.color === "red") {
+    warnButton();
+    return;
+  }
+  if (warning.style.color === "red") {
+    warnButton();
+    return;
+  }
+  if (picked == false) {
+    warnButton();
+    return;
+  }
+  if (gamemode === "") {
+    warnButton();
+    return;
+  }
+  document.querySelector("#warningnign").style.display = "none";
   document.querySelector("#menu").style.display = "none";
   document.querySelector("#backButton").style.display = "inline";
   document.querySelector("#content").style.display = "grid";
@@ -137,26 +196,30 @@ async function searchButtonClicked() {
   document.querySelector("#fader p").style.opacity = 0;
   document.querySelector("#fader p").innerHTML = "Loading";
 
-  document.querySelector("#fader").animate([
-  {transform: "translate3d(0, -100%, 0)"},
-  {transform: "translate3d(0, 0, 0)"}
-  ], {
-  duration: 500,
-  easing: 'ease-out',
-  iterations: 1,
-  direction: 'alternate'
-  });
+  document
+    .querySelector("#fader")
+    .animate(
+      [
+        { transform: "translate3d(0, -100%, 0)" },
+        { transform: "translate3d(0, 0, 0)" },
+      ],
+      {
+        duration: 500,
+        easing: "ease-out",
+        iterations: 1,
+        direction: "alternate",
+      }
+    );
 
-  document.querySelector("#fader p").animate([
-  {opacity: "0"},
-  {opacity: "1"}
-  ], {
-  delay: 500,
-  duration: 500,
-  easing: 'ease-out',
-  iterations: 1,
-  direction: 'alternate'
-  });
+  document
+    .querySelector("#fader p")
+    .animate([{ opacity: "0" }, { opacity: "1" }], {
+      delay: 500,
+      duration: 500,
+      easing: "ease-out",
+      iterations: 1,
+      direction: "alternate",
+    });
   await delay(500);
   document.querySelector("#fader p").style.opacity = 1;
 
@@ -173,27 +236,48 @@ async function searchButtonClicked() {
       term += `&end_date=${year.value}-12-31`;
     }
   }
-  console.log(term);
   url += "?q=";
   if (term) url += term;
   url += "&sfw";
 
-  rand2 = Math.floor(Math.random() * (4 - 1 + 1) + 1);
-
   let type = "";
-  switch (rand2) {
-    case 1:
-      type = "&type=ona";
-      break;
-    case 2:
-      type = "&type=tv";
-      break;
-    case 3:
-      type = "&type=movie";
-      break;
-    case 4:
-      type = "&type=ova";
-      break;
+  if(manga == false){
+    rand2 = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+    switch (rand2) {
+      case 1:
+        type = "&type=ona";
+        break;
+      case 2:
+        type = "&type=tv";
+        break;
+      case 3:
+        type = "&type=movie";
+        break;
+      case 4:
+        type = "&type=ova";
+        break;
+    }
+    url += type;
+  }
+  else{
+    rand2 = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+    switch (rand2) {
+      case 1:
+        type = "&type=manga";
+        break;
+      case 2:
+        type = "&type=novel";
+        break;
+      case 3:
+        type = "&type=lightnovel";
+        break;
+      case 4:
+        type = "&type=manhwa";
+        break;
+      case 5:
+        type = "&type=manhua";
+        break;
+    }
   }
   url += type;
   console.log(url);
@@ -214,6 +298,10 @@ function getData(url) {
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function warnButton() {
+  document.querySelector("#warningnign").style.display = "inline";
 }
 
 async function dataLoaded(e) {
@@ -244,19 +332,31 @@ async function dataLoaded(e) {
     await delay(1000);
 
     let results = obj2.data;
-
     rand = Math.floor(Math.random() * (results.length - 1 + 1) + 1);
     let result = results[rand];
+    console.log(result);
     let imageUrl = "../images/no-image-found.png";
     if (result.images != null) imageUrl = result.images.jpg.large_image_url;
-    
 
     let rating = result.rating;
     let title = result.title;
     let titleEng = result.title_english;
-    let airDates = result.aired.string;
+    let airDates;
+    if(!manga) airDates = result.aired.string;
+    
     let genres = result.genres;
     let genreString = "";
+    if(i == 0){
+      score = result.score;
+      rank = result.rank;
+      popularity = result.popularity;
+    }
+    else{
+      score2 = result.score;
+      rank2 = result.rank;
+      popularity2 = result.popularity;
+    }
+
     for (let i = 0; i < genres.length; i++) {
       genreString += genres[i].name;
       if (i != genres.length - 1) genreString += ", ";
@@ -269,7 +369,10 @@ async function dataLoaded(e) {
             <div class = 'result-inner'>`;
 
     let titleStr;
-    titleStr = (titleEng === title) ? `<span>Title: ${titleEng}</span>` : titleStr = `<span>Titles: ${titleEng} // ${title}</span>`;
+    titleStr =
+      titleEng === title
+        ? `<span>Title: ${titleEng}</span>`
+        : (titleStr = `<span>Titles: ${titleEng} // ${title}</span>`);
     if (titleStr.length > 40) {
       titleStr = `<span>Title: ${titleEng}</span>`;
     }
@@ -278,9 +381,11 @@ async function dataLoaded(e) {
     }
 
     line += titleStr;
-    line += `<span>Genres: ${genreString} </span>
-            <span>Air Dates: ${airDates}</span>
-            <span>Rating: ${rating}</span>
+    line += `<span>Genres: ${genreString} </span>`;
+
+
+    if(!manga) line +=  `<span>Air Dates: ${airDates}</span>`
+    line += `<span>Rating: ${rating}</span>
             </div>
         </div>`;
 
@@ -289,16 +394,48 @@ async function dataLoaded(e) {
   document.querySelector("#content").innerHTML = bigString;
   await delay(500);
   document.querySelector("#fader p").innerHTML = "Loaded";
-  document.querySelector("#fader").animate([
-  {opacity: "1"},
-  {opacity: "0"}
-  ], {
-  duration: 500,
-  easing: 'ease-out',
-  direction: 'alternate'
-  });
+  document
+    .querySelector("#fader")
+    .animate([{ opacity: "1" }, { opacity: "0" }], {
+      duration: 500,
+      easing: "ease-out",
+      direction: "alternate",
+    });
   await delay(500);
   document.querySelector("#fader").style.display = "none";
+
+  let resultImages = document.querySelectorAll(".result img");
+ 
+  resultImages[0].onclick = function (e) {
+    switch (gamemode) {
+      case "Popularity":
+        higher = popularity > popularity2;
+        break;
+      case "Score":
+        higher = score > score2;
+        break;
+      case "Rank":
+        higher = rank > rank2;
+        break;
+    }
+    
+  console.log(higher);
+  };
+  resultImages[1].onclick = function (e) {
+    switch (gamemode) {
+      case "Popularity":
+        higher = popularity < popularity2;
+        break;
+      case "Score":
+        higher = score < score2;
+        break;
+      case "Rank":
+        higher = rank < rank2;
+        break;
+    }
+    
+    console.log(higher);
+  };
 }
 
 function dataError(e) {
