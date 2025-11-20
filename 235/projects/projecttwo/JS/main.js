@@ -28,6 +28,7 @@ let yearStart2 = yearVal2.innerHTML;
 let yearBool = false;
 let yearBool2 = false;
 let searchedURL;
+let firstURL;
 
 let score;
 let rank;
@@ -171,11 +172,11 @@ function backButton() {
 }
 
 async function searchButtonClicked() {
-  if (warning2.style.color === "red") {
+  if (yr.style.color === "red") {
     warnButton();
     return;
   }
-  if (warning.style.color === "red") {
+  if (yr2.style.color === "red") {
     warnButton();
     return;
   }
@@ -239,6 +240,7 @@ async function searchButtonClicked() {
   url += "?q=";
   if (term) url += term;
   url += "&sfw";
+  if (gamemode === "Score") url +=  "&min_score=1";
 
   let type = "";
   if(manga == false){
@@ -280,8 +282,9 @@ async function searchButtonClicked() {
     }
   }
   url += type;
-  console.log(url);
+  //console.log(url);
   searchedURL = url;
+  firstURL = url;
   // 12 Request data!
   getData(url);
 }
@@ -328,13 +331,13 @@ async function dataLoaded(e) {
     };
     xhr2.onerror = dataError;
     xhr2.open("GET", searchedURL);
+    //console.log(searchedURL);
     xhr2.send();
     await delay(1000);
-
     let results = obj2.data;
     rand = Math.floor(Math.random() * (results.length - 1 + 1) + 1);
-    let result = results[rand];
-    console.log(result);
+    let result = results[rand - 1];
+    //console.log(result);
     let imageUrl = "../images/no-image-found.png";
     if (result.images != null) imageUrl = result.images.jpg.large_image_url;
 
@@ -364,9 +367,17 @@ async function dataLoaded(e) {
     if (!rating) rating = "unrated";
 
     rating = rating.toUpperCase();
-    let line = `<div class = 'result'>
+    let line;
+    
+    line = `<div class = 'result' id = 'red'>
             <img src='${imageUrl}' title = '${result.id}' />
             <div class = 'result-inner'>`;
+
+    if(i == 0){
+      line = `<div class = 'result' id = 'blue'>
+            <img src='${imageUrl}' title = '${result.id}' />
+            <div class = 'result-inner'>`;
+    }
 
     let titleStr;
     titleStr =
@@ -390,7 +401,21 @@ async function dataLoaded(e) {
         </div>`;
 
     bigString += line;
+
   }
+  switch (gamemode) {
+      case "Popularity":
+        if(popularity == popularity2) getData(firstURL);
+        break;
+      case "Score":
+        if(score == score2) getData(firstURL);
+        
+        break;
+      case "Rank":
+        if(rank == rank2) getData(firstURL);
+        break;
+    }
+
   document.querySelector("#content").innerHTML = bigString;
   await delay(500);
   document.querySelector("#fader p").innerHTML = "Loaded";
@@ -409,33 +434,92 @@ async function dataLoaded(e) {
   resultImages[0].onclick = function (e) {
     switch (gamemode) {
       case "Popularity":
-        higher = popularity > popularity2;
+        higher = popularity < popularity2;
+        console.log("1: " + popularity);
+        console.log("2: " + popularity2);
         break;
       case "Score":
         higher = score > score2;
-        break;
-      case "Rank":
-        higher = rank > rank2;
-        break;
-    }
-    
-  console.log(higher);
-  };
-  resultImages[1].onclick = function (e) {
-    switch (gamemode) {
-      case "Popularity":
-        higher = popularity < popularity2;
-        break;
-      case "Score":
-        higher = score < score2;
+        console.log("1: " + score);
+        console.log("2: " + score2);
         break;
       case "Rank":
         higher = rank < rank2;
+        console.log("1: " + rank);
+        console.log("2: " + rank2);
         break;
     }
-    
     console.log(higher);
+    if(higher){
+      correct();
+    }
   };
+
+  resultImages[1].onclick = function (e) {
+    switch (gamemode) {
+      case "Popularity":
+        higher = popularity > popularity2;
+        console.log("1: " + popularity);
+        console.log("2: " + popularity2);
+        break;
+      case "Score":
+        higher = score < score2;
+        console.log("1: " + score);
+        console.log("2: " + score2);
+        break;
+      case "Rank":
+        higher = rank > rank2;
+        console.log("1: " + rank);
+        console.log("2: " + rank2);
+        break;
+    }
+    console.log(higher);
+    if(higher){
+      correct();
+    }
+  };
+}
+
+async function correct() {
+  higher = false;
+  document.querySelector("#content").style.display = "none";
+  document.querySelector("#correct").style.display = "grid";
+  document.querySelector("#correct").style.opacity = 1;
+  document.querySelector("#correct p").style.opacity = 0;
+
+  document
+    .querySelector("#correct p")
+    .animate([{ opacity: "0" }, { opacity: "1" }], {
+      duration: 500,
+      easing: "ease-out",
+      iterations: 1,
+      direction: "alternate",
+    });
+  await delay(500);
+  document.querySelector("#correct p").style.opacity = 1;
+
+  document
+    .querySelector("#correct p")
+    .animate([{ opacity: "1" }, { opacity: "0" }], {
+      duration: 500,
+      easing: "ease-in",
+      iterations: 1,
+      direction: "alternate",
+    });
+
+  document
+    .querySelector("#correct")
+    .animate([{ opacity: "1" }, { opacity: "0" }], {
+      duration: 500,
+      easing: "ease-in",
+      iterations: 1,
+      direction: "alternate",
+    });
+  await delay(500);
+  document.querySelector("#correct").style.opacity = 0;
+  document.querySelector("#correct p").style.opacity = 0;
+  document.querySelector("#correct").style.display = "none";
+  searchButtonClicked();
 }
 
 function dataError(e) {

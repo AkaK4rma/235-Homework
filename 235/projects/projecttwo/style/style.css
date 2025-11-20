@@ -17,6 +17,13 @@ body{
   opacity: 0;
 }
 
+#blue{
+  background-color: rgba(255, 0, 0, .5);
+}
+
+#red{
+  background-color: rgba(0, 0, 255, .5);
+}
 
 header {
   /* background: url(../images/cats.jpg); */
@@ -46,8 +53,16 @@ header h1 {
   place-items: center;
   height: 100vh;
   width: 100vw;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   background-color: #a031bc;
+}
+
+#correct{
+  display: none;
+  position: absolute;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #55ca45;
 }
 
 #fader p{
@@ -64,7 +79,8 @@ header h1 {
 
 .result {
   display: flex;
-  width: 49vw;
+  width: 50vw;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
