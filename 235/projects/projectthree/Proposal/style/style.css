@@ -1,0 +1,161 @@
+/* --- CSS Variables for Theme: Cute/Dark --- */
+:root {
+    --bg-dark: #2e6160;        /* Deep purple/black background */
+    --card-bg: #1f323d;        /* Slightly lighter purple for cards */
+    --text-main: #f0e6ff;      /* Off-white/lavender text */
+    --accent-pink: #b3ffb2;    /* Cute pastel pink */
+    --accent-green: #b5ead7;   /* Cute pastel green (Nature/Geomancy) */
+    --accent-gold: #c1e8ff;    /* Magic gold */
+    --font-header: 'Righteous', sans-serif;
+    --font-body: 'Quicksand', sans-serif;
+}
+
+/* --- Reset & Global Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Typography --- */
+h1, h2, h3 {
+    font-family: var(--font-header);
+    color: var(--accent-green);
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 10px rgba(181, 234, 215, 0.3);
+}
+
+h2 {
+    border-bottom: 1px solid var(--accent-pink);
+    padding-bottom: 8px;
+    font-size: 1.5rem;
+}
+
+h3 {
+    color: var(--accent-gold);
+    font-size: 1.2rem;
+    margin-top: 15px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+strong {
+    color: var(--accent-pink);
+}
+
+/* --- Header --- */
+.main-header {
+    text-align: center;
+    padding: 40px 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--accent-green);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--accent-pink);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* --- Grid Layout --- */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 30px;
+    align-items: start;
+}
+
+/* --- Cards --- */
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-green);
+}
+
+/* Specific icon styling */
+.card h2 i {
+    margin-right: 10px;
+    color: var(--accent-pink);
+}
+
+/* --- Lists --- */
+ul, ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* --- Mockup Images --- */
+.mockup-container figure {
+    margin-bottom: 20px;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.mockup-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    border: 2px solid var(--accent-gold);
+}
+
+figcaption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--accent-green);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* --- Footer / Dev Profile --- */
+.dev-profile {
+    background: linear-gradient(135deg, var(--card-bg) 0%, #201530 100%);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 20px;
+    border-left: 5px solid var(--accent-pink);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .grid-layout {
+        grid-template-columns: 1fr; /* Stack to one column */
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+}

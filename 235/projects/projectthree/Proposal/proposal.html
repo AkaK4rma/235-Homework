@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geomancy - Project 3 Proposal</title>
+    <link rel="stylesheet" href="style/style.css">
+    <!-- Google Fonts: Cinzel (Magic/Dark) and Quicksand (Cute/Readable) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <h1><i class="fa-solid fa-leaf"></i> Geomancy</h1>
+            <p class="subtitle">A Tactical Grid Based Bullet-Hell</p>
+        </header>
+
+        <main class="grid-layout">
+            
+            <!-- Left Column -->
+            <div class="column left-col">
+                <section class="card">
+                    <h2><i class="fa-solid fa-bolt"></i> High Concept</h2>
+                    <p><strong>Geomancy</strong> is a high-contrast, tactical bullet-hell prototype played on a 4x5 fixed grid. The player controls a wizard avatar and combines movement, an invincible dash, and a Siphon mechanic (similar to <em>Ikaruga's</em> polarity switching) to survive and defeat a massive, single-screen Evil Tree. The project's unique "Cute/Dark" aesthetic blends appealing character design with demanding, high-performance gameplay.</p>
+                </section>
+
+                <section class="card">
+                    <h2><i class="fa-solid fa-gamepad"></i> Genre</h2>
+                    <p>Boss-Rush Prototype, Grid-Based Tactical Action, Fixed-Screen Bullet Hell.</p>
+                </section>
+
+                <section class="card">
+                    <h2><i class="fa-solid fa-desktop"></i> Platform</h2>
+                    <p>Desktop Web (PC/Mac). The project will utilize the <strong>PixiJS</strong> library, leveraging WebGL acceleration capable of efficient, high-frame-rate rendering of hundreds of moving bullet sprites and particle effects.</p>
+                </section>
+
+                <section class="card">
+                    <h2><i class="fa-solid fa-book-open"></i> Story</h2>
+                    <p>The player takes on the role of a <strong>Vizard</strong>, a wizard who was outcast from the academy and forced to study on their own. After being outcast, their studies led them to adopt a vagabond lifestyle, leading them to areas unknown.</p>
+                    <p>During these journeys, they encountered many a foe, but none as strong as the <strong>Root</strong>, a massive tree that attacks using its roots, branches, and apples. The narrative is concise but open. It allows the focus to be on the moment-to-moment challenge of survival and achieving a low time to beat the boss.</p>
+                </section>
+
+                <section class="card">
+                    <h2><i class="fa-solid fa-palette"></i> Aesthetics</h2>
+                    <p>The project employs a <strong>"Cute/Dark"</strong> aesthetic, striking a strong visual contrast.</p>
+                    <ul>
+                        <li><strong>The Avatar:</strong> Small and expressive, designed to evoke a Kirby-like appeal.</li>
+                        <li><strong>The Boss:</strong> The softness is carried along to the Root Boss, a large tree that seems unassuming at first but attempts to snuff out the life of those who challenge it.</li>
+                        <li><strong>The World:</strong> The background is a simple field. The 4x5 grid lines use a subtle, pastel glow. Bullet sprites are simple, distinct geometric shapes (apples and roots).</li>
+                        <li><strong>Feedback:</strong> To clearly denote their Siphon color type, attacks will have different colors, and grids will flash the color of the attack to be absorbed.</li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="column right-col">
+                <section class="card">
+                    <h2><i class="fa-solid fa-image"></i> Gameplay Mockups</h2>
+                    <div class="mockup-container">
+                        <!-- Replace these sources with your actual images -->
+                        <figure>
+                            <img src="https://placehold.co/600x400/2c1a3d/e0b0ff?text=Gameplay+Mockup+1+(No+Image+Found)" alt="Gameplay Mockup 1">
+                            <figcaption>Fig 1. Proposed Grid Layout</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="https://placehold.co/600x400/1a3d2c/98fb98?text=Boss+Encounter+Mockup+(No+Image+Found)" alt="Boss Encounter Mockup">
+                            <figcaption>Fig 2. The Root Boss Encounter</figcaption>
+                        </figure>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <h2><i class="fa-solid fa-chess-board"></i> Gameplay & Mechanics</h2>
+                    <p>The game is a single-screen, single-boss encounter designed to test tactical precision.</p>
+                    
+                    <h3>The Core Loop</h3>
+                    <ol class="game-loop">
+                        <li><strong>Player Input:</strong> Press WASD (Move), Space/LMB (Attack), Shift (Dash), or Z/RMB (Siphon).</li>
+                        <li><strong>Game Action:</strong> The Vizard moves or fires. The Root Boss executes its current phase's attack script (Red/Blue bullets).</li>
+                        <li><strong>Feedback:</strong> Score increases, boss health drops, audio cues play, or the Super Attack Meter charges.</li>
+                    </ol>
+
+                    <h3>Core Mechanics</h3>
+                    <ul class="mechanics-list">
+                        <li><strong>Grid Movement:</strong> Player moves one square at a time on the 4x5 grid, with <em>Horizontal Grid Wrap</em> to instantly reposition to the other side.</li>
+                        <li><strong>Quick Dash (Shift):</strong> Instantly moves two squares with a crucial <em>0.5s of Invulnerability</em> on a fixed cooldown.</li>
+                        <li><strong>Siphon (Z/RMB):</strong> Absorbs <em>same-colored bullets</em> by running into them to charge the Super Attack Meter. Hitting opposite-colored bullets results in damage.</li>
+                    </ul>
+                </section>
+
+                <section class="card highlight-card">
+                    <h2><i class="fa-solid fa-rocket"></i> Scope & MVP</h2>
+                    <p>The scope is constrained to a single boss to allow for deep polish.</p>
+                    
+                    <h3>MVP Focus</h3>
+                    <p>Ensuring core movement (Grid, Wrap, Dash), collision detection, and <strong>Phase 1</strong> of the boss fight are perfect. The Siphon will be a simple heal/destroy mechanic initially.</p>
+                    
+                    <h3>Stretch Goals</h3>
+                    <ul>
+                        <li>Full Dual-Color Siphon/Super Attack Meter implementation.</li>
+                        <li>Phase 2 and Phase 3 of the Boss (escalating difficulty).</li>
+                        <li>Custom PixiJS shader/filter for Dash visuals.</li>
+                    </ul>
+                </section>
+            </div>
+
+        </main>
+
+        <!-- Footer / About Dev -->
+        <footer class="dev-profile">
+            <h2><i class="fa-solid fa-user-astronaut"></i> About the Developer</h2>
+            <div class="dev-content">
+                <p><strong>Gabriel Roddy</strong> is a 2nd-year student majoring in Game Development and Design.</p>
+                <p>My interests lie in enhancing user experience by putting game feel on the forefront, game design polish, and learning how to implement complex mechanics. My skill set includes ES6+ JavaScript, C#, the MonoGame framework, Unity, game design, and working with web-based rendering libraries.</p>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
