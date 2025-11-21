@@ -453,6 +453,9 @@ async function dataLoaded(e) {
     if(higher){
       correct();
     }
+    else{
+      incorrect();
+    }
   };
 
   resultImages[1].onclick = function (e) {
@@ -476,6 +479,9 @@ async function dataLoaded(e) {
     console.log(higher);
     if(higher){
       correct();
+    }
+    else{
+      incorrect();
     }
   };
 }
@@ -519,6 +525,48 @@ async function correct() {
   document.querySelector("#correct").style.opacity = 0;
   document.querySelector("#correct p").style.opacity = 0;
   document.querySelector("#correct").style.display = "none";
+  searchButtonClicked();
+}
+
+async function incorrect() {
+  higher = false;
+  document.querySelector("#content").style.display = "none";
+  document.querySelector("#incorrect").style.display = "grid";
+  document.querySelector("#incorrect").style.opacity = 1;
+  document.querySelector("#incorrect p").style.opacity = 0;
+
+  document
+    .querySelector("#incorrect p")
+    .animate([{ opacity: "0" }, { opacity: "1" }], {
+      duration: 500,
+      easing: "ease-out",
+      iterations: 1,
+      direction: "alternate",
+    });
+  await delay(500);
+  document.querySelector("#incorrect p").style.opacity = 1;
+
+  document
+    .querySelector("#incorrect p")
+    .animate([{ opacity: "1" }, { opacity: "0" }], {
+      duration: 500,
+      easing: "ease-in",
+      iterations: 1,
+      direction: "alternate",
+    });
+
+  document
+    .querySelector("#incorrect")
+    .animate([{ opacity: "1" }, { opacity: "0" }], {
+      duration: 500,
+      easing: "ease-in",
+      iterations: 1,
+      direction: "alternate",
+    });
+  await delay(500);
+  document.querySelector("#incorrect").style.opacity = 0;
+  document.querySelector("#incorrect p").style.opacity = 0;
+  document.querySelector("#incorrect").style.display = "none";
   searchButtonClicked();
 }
 
