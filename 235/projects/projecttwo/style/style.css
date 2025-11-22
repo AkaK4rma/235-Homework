@@ -1,5 +1,10 @@
 * {
-  font-family: verdana, tahoma, sans-serif;
+  font-family: "DM Mono", monospace;
+  z-index: 1;
+}
+
+.menu {
+  height: 100vh;
 }
 
 body{
@@ -13,27 +18,71 @@ body{
   background-position: 0 0, 10px 10px, 30px 30px;
 }
 
+
+#bubble{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 50px;
+  padding: 10px;
+}
+
+.streak{
+  font-family:"Rubik", sans-serif;
+  font-variation-settings: "wght" 400;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 16pt;
+  color: white;
+  border-radius: 50px;
+  padding: 10px;
+}
+
 .container span{
   opacity: 0;
 }
 
 #blue{
-  background-color: rgba(255, 0, 0, .5);
+  background-color: rgba(61, 155, 243, 0.3);
 }
 
 #red{
-  background-color: rgba(0, 0, 255, .5);
+  background-color: rgba(226, 51, 51, 0.5);
 }
 
 header {
   /* background: url(../images/cats.jpg); */
 }
 
+.container p{
+  padding: 5px 0;
+  margin: .5vh auto;
+  transition: .5s ease;
+  border-radius: 5px;
+}
+
+.container p:hover{
+  background-color: white;
+  border-radius: 5px;
+  color: black;
+}
+
 header h1 {
-  margin: 0;
-  color: blue;
+  margin: 0;  
+  color: #a370f0;
   text-align: center;
   font-size: 100px;
+  transition: 700ms ease;
+  font-family: "Rubik", sans-serif;
+  font-variation-settings: "wght" 400;
+}
+
+header h1:hover{
+  font-variation-settings: "wght" 600; 
+  letter-spacing: 1px;
 }
 
 #status {
@@ -44,6 +93,7 @@ header h1 {
   display: none;
   place-items: center;
   height: 100vh;
+  width: 100vw;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
@@ -53,7 +103,8 @@ header h1 {
   place-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #a031bc;
+  background-color: #a370f0;
+  z-index: 2;
 }
 
 #correct{
@@ -63,6 +114,7 @@ header h1 {
   height: 100vh;
   width: 100vw;
   background-color: #55ca45;
+  z-index: 3;
 }
 
 #incorrect{
@@ -72,6 +124,7 @@ header h1 {
   height: 100vh;
   width: 100vw;
   background-color: #ca4545;
+  z-index: 3;
 }
 
 #incorrect p, #correct p{
@@ -90,6 +143,63 @@ header h1 {
   left: 10px;
 }
 
+.buttonback {
+ outline: none;
+ cursor: pointer;
+ border: none;
+ padding: 0.9rem 2rem;
+ margin: 0;
+ font-family: inherit;
+ font-size: inherit;
+ position: relative;
+ display: inline-block;
+ letter-spacing: 0.05rem;
+ font-weight: 700;
+ font-size: 17px;
+ border-radius: 500px;
+ overflow: hidden;
+ background: #a370f0;
+ color: ghostwhite;
+ transition: .5s ease;
+}
+
+.buttonback:hover{
+  transform: scale(1.05, 1.1);
+}
+
+.buttonback span {
+ position: relative;
+ z-index: 10;
+ transition: color 0.4s;
+}
+
+.buttonback:hover span {
+ color: rgba(20, 20, 20, 1);
+}
+
+.buttonback::before,
+.buttonback::after {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ z-index: 0;
+}
+
+.buttonback::before {
+ content: "";
+ background: rgba(20, 20, 20, 1);
+ width: 120%;
+ left: -10%;
+ transform: skew(30deg);
+ transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.buttonback:hover::before {
+ transform: translate3d(100%, 0, 0);
+}
+
 .result {
   display: flex;
   width: 50vw;
@@ -100,9 +210,13 @@ header h1 {
 }
 
 .result-inner {
-  padding: 30px;
-  padding-bottom: 0;
+  background-color: rgba(20, 20, 20, 1);
+  padding: 20px;
+  margin-top: 10px;
   border-radius: 10px;
+  min-width: 50%;
+  font-variation-settings: "wght" 400;
+  text-align: center;
 }
 
 
@@ -110,20 +224,23 @@ header h1 {
   box-shadow: 0 15px 17px -7px rgba(0, 0, 0, 0.6);
   transition: .5s ease;
   border-radius: 10px;
-  max-height: 80vh;
-  min-width: 50%;
+  max-height: 80%;
+  max-width: 80%;
   cursor: pointer;
 }
 
 .result img:hover {
-  transform: scale(1.05);
+  transform: scale(1.05) translate(0, -15px);
   transition: .5s ease;
 }
 
 .result span {
-  font-size: 12px;
+  color: white;
   font-weight: bold;
   display: block;
+  font-family: "Rubik", sans-serif;
+  font-size: 12pt;
+  padding: 4px 0;
 }
 
 #warningnign{
@@ -131,44 +248,214 @@ header h1 {
   display: none;
 }
 
-.result audio {
-  width: 130px;
+/* From Uiverse.io by AbanoubMagdy1 */ 
+.wave-group {
+  position: relative;
 }
-* button {
-  display: inline-block;
+
+.wave-group .input {
+  font-size: 16px;
+  padding: 20px 10px 5px 5px;
+  display: block;
+  border: none;
+  border-bottom: 1px solid white;
+  background: transparent;
+}
+
+.wave-group .input:focus {
+  outline: none;
+}
+
+.wave-group .label {
+  color: white;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  display: flex;
+}
+
+.wave-group .label-char {
+  transition: 0.2s ease all;
+  transition-delay: calc(var(--index) * .05s);
+}
+
+.wave-group .input:focus ~ label .label-char,
+.wave-group .input:valid ~ label .label-char {
+  transform: translateY(-20px);
+  font-size: 14px;
+  color: #a370f0;
+}
+
+.wave-group .bar {
+  position: relative;
+  display: block;
+  width: 207px;
+}
+
+.wave-group .bar:before,.wave-group .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #a370f0;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.wave-group .bar:before {
+  left: 50%;
+}
+
+.wave-group .bar:after {
+  right: 50%;
+}
+
+.wave-group .input:focus ~ .bar:before,
+.wave-group .input:focus ~ .bar:after {
+  width: 50%;
+}
+
+#Year{
+  color: white;
+}
+
+#ani:hover, #cat:hover, #yr:hover, #yr2:hover{
+  background-color: transparent;
+  color: blacks;
+}
+
+
+#warn:hover, #warn2:hover, #warningnign:hover{
+  background-color: transparent;
+  color: red;
+}
+
+/* From Uiverse.io by coding-masala */ 
+.radio-buttons {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.radio-button {
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 50px;
-  padding: 10px 18px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-  font-size: 9.5pt;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  font-family: sans-serif;
-  text-decoration: none;
-  padding: 10px;
 }
 
-button.green {
-  margin-top: 10px;
-  border-color: #8fc800;
-  background: #8fc800;
-  background: linear-gradient(top, #8fc800 0%, #438c00 100%);
+.radio-button p{
+  margin: 5px 0;
 }
 
-button:hover {
-  background: #8fdd00;
+.radio-button input[type="radio"] {
+  display: none;
 }
 
-button:active {
-  background: #8fff00;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+.radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #aaa;
+  position: relative;
+  margin-right: 10px;
 }
 
-button:focus {
-  outline: 0;
+.radio-circle::before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ddd;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0.2s ease-in-out;
+}
+
+.radio-button input[type="radio"]:checked + .radio-circle::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.radio-button:nth-of-type(1) input[type="radio"]:checked + .radio-circle::before {
+  background-color: #a370f0;
+}
+
+.radio-button:nth-of-type(2) input[type="radio"]:checked + .radio-circle::before {
+  background-color: #ffffff;
+}
+
+.radio-button:nth-of-type(3) input[type="radio"]:checked + .radio-circle::before {
+  background-color: #4973ff;
+}
+
+.radio-button:hover .radio-circle {
+  border-color: #555;
+}
+
+.radio-button:hover input[type="radio"]:checked + .radio-circle::before {
+  background-color: #555;
+}
+
+
+.cssbuttons-io-button {
+  background: #a370f0;
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #714da6;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+  cursor: pointer;
+}
+
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: #7b52b9;
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
 }
 
 .widgets {
@@ -177,9 +464,14 @@ button:focus {
 }
 
 .container{
+  background-color: rgba(20, 20, 20, 1);
+  border: 1px solid white;
+  color: white;
   border-radius: 10px;
-  background-color: wheat;
   padding: 0 20px;
+  padding-bottom: 10px;
+  margin: 20px 0;
+  min-height: 50vh;
 }
 
 .container h3{
@@ -188,10 +480,17 @@ button:focus {
 
 #parameters{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
 }
 
+.param{
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 0 10px;
+}
 
 @keyframes upcome{
   0% {
@@ -210,5 +509,90 @@ button:focus {
   }
   100%{
     opacity: 1;
+  }
+}
+
+.helper{
+  display: none;
+  opacity: 1;
+  color: black;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  background-color: white;
+  width: 10%;
+  transition: ease 1s;
+  margin-left: 30px;
+}
+
+@media only screen and (max-height: 850px) {
+  .container{
+  margin: 20px 10px;
+  min-height: auto;
+  height: 40vh;
+  overflow: scroll;
+  }
+
+  .helper{
+  display: block;
+  }
+}
+
+@media only screen and (max-width: 794px) {
+
+  header h1{
+    font-size: 12vw;
+  }
+
+  .container{
+  margin: 20px 10px;
+  min-height: 40vh;
+  overflow: scroll;
+  width: 80%;
+  }
+
+  .result {
+  width: 100vw;
+  height: 50vh;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.result-inner {
+  background-color: rgba(20, 20, 20, 1);
+  padding: 15px;
+  margin: 0;
+  margin-left: 10px;
+  border-radius: 10px;
+  min-width: 20%;
+  max-width: 30%;
+  text-align: center;
+}
+
+.streak{
+  left: auto;
+  right: 10px;
+}
+
+#bubble{
+  border-radius: 5px;
+  width: 10%;
+  transform: translate(-50%, -75%);
+  text-align: center;
+}
+
+.result img {
+  max-height: 35vh;
+  max-width: 50%;
+}
+
+.result img:hover {
+  transform: scale(1.02);
+  transition: .5s ease;
+}
+
+  #content {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
   }
 }

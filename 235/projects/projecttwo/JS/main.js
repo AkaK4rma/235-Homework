@@ -4,14 +4,16 @@ window.onload = (e) => {
   document.querySelector("#backButton").onclick = backButton;
 };
 
-// 2
+//#region Fields
+let streak = 0;
 let manga = false;
+let loadAnim = true;
 let spans = document.querySelectorAll(".container span");
 let legend = document.querySelector("legend");
-let animan = document.querySelectorAll("#AniMan p input");
-let poprate = document.querySelectorAll("#PopRate p input");
-let year = document.querySelector("#year p input");
-let year2 = document.querySelector("#year2 p input");
+let animan = document.querySelectorAll("#AniMan input");
+let poprate = document.querySelectorAll("#PopRate input");
+let year = document.querySelector("#year input");
+let year2 = document.querySelector("#year2 input");
 let button = document.querySelector("button");
 let anime = document.querySelector("#ani");
 let animeStart = anime.innerHTML;
@@ -38,6 +40,9 @@ let rank2;
 let popularity2;
 let higher;
 
+//#endregion
+
+//#region setup
 async function loadMenu() {
   for (let i = 0; i < spans.length; i++) {
     spans[i].style.opacity = 0;
@@ -164,11 +169,14 @@ year2.addEventListener("input", (event) => {
   }
 });
 
+//#endregion
+
 function backButton() {
   document.querySelector("#menu").style.display = "initial";
   document.querySelector("#content").style.display = "none";
   document.querySelector("#fader").style.display = "none";
   document.querySelector("#backButton").style.display = "none";
+  loadAnim = true;
 }
 
 async function searchButtonClicked() {
@@ -194,35 +202,38 @@ async function searchButtonClicked() {
   document.querySelector("#content").style.display = "grid";
   document.querySelector("#content").innerHTML = "";
   document.querySelector("#fader").style.display = "grid";
-  document.querySelector("#fader p").style.opacity = 0;
   document.querySelector("#fader p").innerHTML = "Loading";
 
-  document
-    .querySelector("#fader")
-    .animate(
-      [
-        { transform: "translate3d(0, -100%, 0)" },
-        { transform: "translate3d(0, 0, 0)" },
-      ],
-      {
+  if(loadAnim){
+    document.querySelector("#fader p").style.opacity = 0;
+    document.querySelector("#fader").style.opacity = 1;
+    document
+      .querySelector("#fader")
+      .animate(
+        [
+          { transform: "translate3d(0, -100%, 0)" },
+          { transform: "translate3d(0, 0, 0)" },
+        ],
+        {
+          duration: 500,
+          easing: "ease-out",
+          iterations: 1,
+          direction: "alternate",
+        }
+      );
+  
+    document
+      .querySelector("#fader p")
+      .animate([{ opacity: "0" }, { opacity: "1" }], {
+        delay: 500,
         duration: 500,
         easing: "ease-out",
         iterations: 1,
         direction: "alternate",
-      }
-    );
-
-  document
-    .querySelector("#fader p")
-    .animate([{ opacity: "0" }, { opacity: "1" }], {
-      delay: 500,
-      duration: 500,
-      easing: "ease-out",
-      iterations: 1,
-      direction: "alternate",
-    });
-  await delay(500);
-  document.querySelector("#fader p").style.opacity = 1;
+      });
+    await delay(500);
+    document.querySelector("#fader p").style.opacity = 1;
+  }
 
   const JIKAN_URL = "https://api.jikan.moe/v4/";
   let url = manga ? JIKAN_URL + "manga" : JIKAN_URL + "anime";
@@ -259,7 +270,6 @@ async function searchButtonClicked() {
         type = "&type=ova";
         break;
     }
-    url += type;
   }
   else{
     rand2 = Math.floor(Math.random() * (5 - 1 + 1) + 1);
@@ -280,7 +290,9 @@ async function searchButtonClicked() {
         type = "&type=manhua";
         break;
     }
+    
   }
+  type += "&genres_exclude=9,49,12,58"
   url += type;
   //console.log(url);
   searchedURL = url;
@@ -304,7 +316,7 @@ function delay(ms) {
 }
 
 function warnButton() {
-  document.querySelector("#warningnign").style.display = "inline";
+  document.querySelector("#warningnign").style.display = "block";
 }
 
 async function dataLoaded(e) {
@@ -333,7 +345,8 @@ async function dataLoaded(e) {
     xhr2.open("GET", searchedURL);
     //console.log(searchedURL);
     xhr2.send();
-    await delay(1000);
+    await delay(2000);
+    
     let results = obj2.data;
     rand = Math.floor(Math.random() * (results.length - 1 + 1) + 1);
     let result = results[rand - 1];
@@ -374,7 +387,7 @@ async function dataLoaded(e) {
             <div class = 'result-inner'>`;
 
     if(i == 0){
-      line = `<div class = 'result' id = 'blue'>
+      line =`<div class = 'result' id = 'blue'>
             <img src='${imageUrl}' title = '${result.id}' />
             <div class = 'result-inner'>`;
     }
@@ -392,14 +405,18 @@ async function dataLoaded(e) {
     }
 
     line += titleStr;
-    line += `<span>Genres: ${genreString} </span>`;
+    if(genreString !== "") line += `<span>Genres: ${genreString} </span>`;
 
 
     if(!manga) line +=  `<span>Air Dates: ${airDates}</span>`
     line += `<span>Rating: ${rating}</span>
             </div>
-        </div>`;
+        </div>
+        <h1 id="bubble">OR</h1>`;
 
+    if(streak >= 1){
+      line += `<h1 class="streak">Streak: ${streak}</h1>`;
+    }
     bigString += line;
 
   }
@@ -426,7 +443,7 @@ async function dataLoaded(e) {
       easing: "ease-out",
       direction: "alternate",
     });
-  await delay(500);
+  await delay(499);
   document.querySelector("#fader").style.display = "none";
 
   let resultImages = document.querySelectorAll(".result img");
@@ -487,6 +504,7 @@ async function dataLoaded(e) {
 }
 
 async function correct() {
+  streak++;
   higher = false;
   document.querySelector("#content").style.display = "none";
   document.querySelector("#correct").style.display = "grid";
@@ -503,6 +521,8 @@ async function correct() {
     });
   await delay(500);
   document.querySelector("#correct p").style.opacity = 1;
+  document.querySelector("#fader").style.display = "grid";
+  document.querySelector("#fader p").innerHTML = "Loading";
 
   document
     .querySelector("#correct p")
@@ -510,7 +530,6 @@ async function correct() {
       duration: 500,
       easing: "ease-in",
       iterations: 1,
-      direction: "alternate",
     });
 
   document
@@ -519,16 +538,17 @@ async function correct() {
       duration: 500,
       easing: "ease-in",
       iterations: 1,
-      direction: "alternate",
     });
   await delay(500);
+  document.querySelector("#correct").style.display = "none";
   document.querySelector("#correct").style.opacity = 0;
   document.querySelector("#correct p").style.opacity = 0;
-  document.querySelector("#correct").style.display = "none";
+  loadAnim = false;
   searchButtonClicked();
 }
 
 async function incorrect() {
+  streak = 0;
   higher = false;
   document.querySelector("#content").style.display = "none";
   document.querySelector("#incorrect").style.display = "grid";
@@ -543,8 +563,10 @@ async function incorrect() {
       iterations: 1,
       direction: "alternate",
     });
-  await delay(500);
+  await delay(499);
   document.querySelector("#incorrect p").style.opacity = 1;
+  document.querySelector("#fader").style.display = "grid";
+  document.querySelector("#fader p").innerHTML = "Loading";
 
   document
     .querySelector("#incorrect p")
@@ -563,10 +585,11 @@ async function incorrect() {
       iterations: 1,
       direction: "alternate",
     });
-  await delay(500);
+  await delay(499);
+  document.querySelector("#incorrect").style.display = "none";
   document.querySelector("#incorrect").style.opacity = 0;
   document.querySelector("#incorrect p").style.opacity = 0;
-  document.querySelector("#incorrect").style.display = "none";
+  loadAnim = false;
   searchButtonClicked();
 }
 
