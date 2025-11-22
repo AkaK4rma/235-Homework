@@ -64,7 +64,7 @@ header {
   border-radius: 5px;
 }
 
-.container p:hover{
+.radio-button:hover{
   background-color: white;
   border-radius: 5px;
   color: black;
@@ -326,7 +326,7 @@ header h1:hover{
 
 #ani:hover, #cat:hover, #yr:hover, #yr2:hover{
   background-color: transparent;
-  color: blacks;
+  color: black;
 }
 
 
@@ -489,7 +489,7 @@ header h1:hover{
   background-color: white;
   color: black;
   border-radius: 10px;
-  padding: 0 10px;
+  padding: 5px 10px;
 }
 
 @keyframes upcome{

@@ -338,14 +338,25 @@ async function dataLoaded(e) {
 
     let xhr2 = new XMLHttpRequest();
     let obj2;
-    xhr2.onload = function (e) {
-      obj2 = JSON.parse(xhr2.responseText);
-    };
+    let loaded = false;
     xhr2.onerror = dataError;
     xhr2.open("GET", searchedURL);
-    //console.log(searchedURL);
+    console.log(searchedURL);
     xhr2.send();
-    await delay(2000);
+    xhr2.onload = function (e) {
+      if(xhr2.status === 200) {
+        obj2 = JSON.parse(xhr2.responseText);
+        loaded = true;
+      }
+      else{
+        backButton();
+      }
+    };
+    do{
+      console.log(loaded);
+      await delay(100);
+    }while(loaded === false);
+    loaded = false;
     
     let results = obj2.data;
     rand = Math.floor(Math.random() * (results.length - 1 + 1) + 1);
