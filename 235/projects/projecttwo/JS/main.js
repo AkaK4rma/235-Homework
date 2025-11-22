@@ -1,14 +1,21 @@
-// 1
+let streakKey;
+let streak;
 window.onload = (e) => {
   document.querySelector("#search").onclick = searchButtonClicked;
   document.querySelector("#backButton").onclick = backButton;
+  streakKey = localStorage.getItem('gar5854streak');
+  streak = 0;
+  if(streakKey != null){
+    streak = parseInt(streakKey);
+  }
 };
 
+
 //#region Fields
-let streak = 0;
+
 let manga = false;
 let loadAnim = true;
-let spans = document.querySelectorAll(".container span");
+let divs = document.querySelectorAll(".contained");
 let legend = document.querySelector("legend");
 let animan = document.querySelectorAll("#AniMan input");
 let poprate = document.querySelectorAll("#PopRate input");
@@ -43,17 +50,18 @@ let higher;
 //#endregion
 
 //#region setup
+
 async function loadMenu() {
-  for (let i = 0; i < spans.length; i++) {
-    spans[i].style.opacity = 0;
-    spans[i].animate([{ opacity: "0" }, { opacity: "1" }], {
+  for (let i = 0; i < divs.length; i++) {
+    divs[i].style.opacity = 0;
+    divs[i].animate([{ opacity: "0" }, { opacity: "1" }], {
       delay: 200 * (i + 1),
       duration: 200,
       iterations: 1,
       direction: "alternate",
     });
     await delay(190 + (200 * (i + 1)));
-    spans[i].style.opacity = 1;
+    divs[i].style.opacity = 1;
   }
 }
 loadMenu();
@@ -516,6 +524,7 @@ async function dataLoaded(e) {
 
 async function correct() {
   streak++;
+  localStorage.setItem('gar5854streak', streak.toString());
   higher = false;
   document.querySelector("#content").style.display = "none";
   document.querySelector("#correct").style.display = "grid";
@@ -560,6 +569,7 @@ async function correct() {
 
 async function incorrect() {
   streak = 0;
+  localStorage.removeItem('gar5854streak');
   higher = false;
   document.querySelector("#content").style.display = "none";
   document.querySelector("#incorrect").style.display = "grid";

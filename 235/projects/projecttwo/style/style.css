@@ -41,7 +41,7 @@ body{
   padding: 10px;
 }
 
-.container span{
+.contained{
   opacity: 0;
 }
 
@@ -57,9 +57,9 @@ header {
   /* background: url(../images/cats.jpg); */
 }
 
-.container p{
+.container span{
   padding: 5px 0;
-  margin: .5vh auto;
+  margin: .5vh 0;
   transition: .5s ease;
   border-radius: 5px;
 }
@@ -251,6 +251,7 @@ header h1:hover{
 /* From Uiverse.io by AbanoubMagdy1 */ 
 .wave-group {
   position: relative;
+  margin-top: 5px;
 }
 
 .wave-group .input {
@@ -320,7 +321,7 @@ header h1:hover{
   width: 50%;
 }
 
-#Year{
+#Year, #Year2{
   color: white;
 }
 
@@ -346,9 +347,10 @@ header h1:hover{
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding: 0 5px;
 }
 
-.radio-button p{
+.radio-button span{
   margin: 5px 0;
 }
 
@@ -356,7 +358,8 @@ header h1:hover{
   display: none;
 }
 
-.radio-circle {
+.radio-button .radio-circle{
+  padding: 0;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -490,6 +493,7 @@ header h1:hover{
   color: black;
   border-radius: 10px;
   padding: 5px 10px;
+  margin: 10px 0;
 }
 
 @keyframes upcome{

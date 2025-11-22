@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
  	<title>Project 2</title>
 	<link rel="stylesheet" href="style/background.css">
@@ -33,69 +33,69 @@
 
 		<div id="parameters">
 			<div class="container">
-				<span>
+				<div class="contained">
 					<h3>Choose the game's parameters!</h3>
-					<legend>Would you like to play based on Anime or Manga</legend>
-				</span>
-				<span>
+					<span>Would you like to play based on Anime or Manga</span>
+				</div>
+				<div class="contained">
 					<div id="AniMan">
 						<div class="radio-buttons">
 						<label class="radio-button">
 							<input type="radio" name="animan" id="Anime" value="true">
-							<div class="radio-circle"></div>
-							<p class="radio-label">Anime</p>
+							<span class="radio-circle"></span>
+							<span class="radio-label">Anime</span>
 						</label>
 						<label class="radio-button">
 							<input type="radio" name="animan" id="Manga" value="" >
-							<div class="radio-circle"></div>
-							<p class="radio-label">Manga</p>
+							<span class="radio-circle"></span>
+							<span class="radio-label">Manga</span>
 						</label>
 						</div>
 						<hr>
 					</div>
-				</span>
-				<span>
+				</div>
+				<div class="contained">
 					<div id="PopRate">
-						<legend>Choose what category</legend>
+						<span>Choose the category</span>
 						<div class="radio-buttons">
 						<label class="radio-button">
 							<input type="radio" name="poprate" id="Pop" value="Popularity">
-							<div class="radio-circle"></div>
-							<p class="radio-label">Popularity (MAL Popularity)</p>
+							<span class="radio-circle"></span>
+							<span class="radio-label">Popularity (MAL Popularity)</span>
 						</label>
 						<label class="radio-button">
 							<input type="radio" name="poprate" id="Rate" value="Rank">
-							<div class="radio-circle"></div>
-							<p class="radio-label">Rank (MAL Rank)</p>
+							<span class="radio-circle"></span>
+							<span class="radio-label">Rank (MAL Rank)</span>
 						</label>
 						<label class="radio-button">
 							<input type="radio" name="poprate" id="Score" value="Score">
-							<div class="radio-circle"></div>
-							<p class="radio-label">Score (1-10 / 10)</p>
+							<span class="radio-circle"></span>
+							<span class="radio-label">Score (1-10 / 10)</span>
 						</label>
 						</div>
 
 						<hr>
 					</div>
-				</span>
-				<span>
+				</div>
+				<div class="contained">
 				<div id="year">
-					<legend>Type the year range (leave blank if you don't want to limit by year)</legend>
+					<span>Type the year range (leave blank if you don't want to limit by year)</span>
 					<div>
 					<div class="wave-group">
 					<input required="" name="year" id="Year" value="" type="text" class="input">
 					<div class="bar"></div>
 					<label class="label">
-						<p class="label-char" style="--index: 0">S</p>
-						<p class="label-char" style="--index: 1">t</p>
-						<p class="label-char" style="--index: 2">a</p>
-						<p class="label-char" style="--index: 3">r</p>
-						<p class="label-char" style="--index: 4">t</p>
-						<p class="label-char" style="--index: 5">&nbsp</p>
-						<p class="label-char" style="--index: 6">Y</p>
-						<p class="label-char" style="--index: 7">e</p>
-						<p class="label-char" style="--index: 8">a</p>
-						<p class="label-char" style="--index: 9">r</p>
+						<span class="label-char" style="--index: 0">S</span>
+						<span class="label-char" style="--index: 1">t</span>
+						<span class="label-char" style="--index: 2">a</span>
+						<span class="label-char" style="--index: 3">r</span>
+						<span class="label-char" style="--index: 4">t</span>
+						<span class="label-char" style="--index: 5">&nbsp;</span>
+						<span class="label-char" style="--index: 6">Y</span>
+						<span class="label-char" style="--index: 7">e</span>
+						<span class="label-char" style="--index: 8">a</span>
+						<span class="label-char" style="--index: 9">r</span>
 						
 					</label>
 					</div>
@@ -105,26 +105,26 @@
 				<div id="year2">
 					<div>
 					<div class="wave-group">
-					<input required="" name="year" id="Year" value="" type="text" class="input">
+					<input required="" name="year" id="Year2" value="" type="text" class="input">
 					<div class="bar"></div>
 					<label class="label">
-						<p class="label-char" style="--index: 0">E</p>
-						<p class="label-char" style="--index: 1">n</p>
-						<p class="label-char" style="--index: 2">d</p>
-						<p class="label-char" style="--index: 3">&nbsp</p>
-						<p class="label-char" style="--index: 4">Y</p>
-						<p class="label-char" style="--index: 5">e</p>
-						<p class="label-char" style="--index: 6">a</p>
-						<p class="label-char" style="--index: 7">r</p>
+						<span class="label-char" style="--index: 0">E</span>
+						<span class="label-char" style="--index: 1">n</span>
+						<span class="label-char" style="--index: 2">d</span>
+						<span class="label-char" style="--index: 3">&nbsp;</span>
+						<span class="label-char" style="--index: 4">Y</span>
+						<span class="label-char" style="--index: 5">e</span>
+						<span class="label-char" style="--index: 6">a</span>
+						<span class="label-char" style="--index: 7">r</span>
 					</label>
 					</div>
 					</div>
 					<p id="warn2"></p>
 				</div>
-				</span>
-				<span>
+				</div>
+				<div class="contained">
 					<hr>
-					<legend id="info">You will play based on: </legend>
+					<span id="info">You will play based on: </span>
 					<div class="param">
 						<p id="ani">Type: </p>
 						<p id="cat">Category: </p>
@@ -132,7 +132,7 @@
 						<p id="yr2">End Year: </p>
 					</div>
 					<p id="warningnign">Please select the game parameters before starting.</p>
-				</span>
+				</div>
 			</div>
 			<div class="helper">Scroll to access the rest of the options</div>
 		</div>
@@ -140,7 +140,7 @@
 		<div class="widgets">
 			<button type="button" id="search" class="cssbuttons-io-button">
 			Press to Play
-			<div class="icon">
+			<span class="icon">
 				<svg
 				height="24"
 				width="24"
@@ -153,7 +153,7 @@
 					fill="currentColor"
 				></path>
 				</svg>
-			</div>
+			</span>
 			</button>
 		</div>
 	</div>
@@ -178,6 +178,7 @@
 	
 	
 </section>
-</body>
+
 <script src="JS/main.js"></script>
+</body>
 </html>
