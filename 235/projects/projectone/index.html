@@ -10,12 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Bogle&family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Hanken+Grotesk:ital,wght@1,900&family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <section class="wrapper">
+    <div id="bg">
+    </div>
+    <nav>
+        <a href="#title">Title</a> 
+        <a href="#cSonic">Showtimes</a>  
+        <a id="HelpyLink" href="#helpy">Helpy</a>
+        <a class="MobileLink" href="#celebration">Announcements</a> 
+        <a class="MobileLink" href="#firstSide">Footer</a>
+    </nav>
+    <div class="wrapper">
         <header>
             <h1>PIZZA TIME!</h1>
             <img id="zelda" src="media/circus_baby.png" alt="">
             <h2>Check out our sister location! Circus Baby's Pizza World</h2>
-            <div id="SonicGraphic">
+            <div class="SonicGraphic" id="sonicGraphic">
                 <img src="media/FE_logo_FFPS.webp" alt="">
             </div>
         </header>
@@ -31,27 +40,29 @@
             <div class="content-container">
                 <div class="content">
                     <img id="cSonic" src="media/CartoonFreddy.png" alt="">
+                    <div class="content2">
                     <h3>SHOWTIME SESSIONS:</h3>
                     <ul>
                         <li class="submenu"><p>FREDDY AND FRIENDS</p>
                             <ul class="menu">
-                                <li><a href="http://google.com">google search</a></li>
-                                <li><a href="http://images.google.com">google images</a></li>
-                                <li><a href="http://about.google">about google</a></li>
+                                <li class="first-sub"><a href="https://freddy-fazbears-pizza.fandom.com/wiki/Freddy_Fazbear">Freddy</a></li>
+                                <li><a href="https://freddy-fazbears-pizza.fandom.com/wiki/Bonnie_the_Rabbit">Bonnie</a></li>
+                                <li><a href="https://freddy-fazbears-pizza.fandom.com/wiki/Chica_the_Chicken">Chica</a></li>
                             </ul>
                         </li>
                         <li class="submenu"><p>PIRATES COVE</p>
                             <ul class="menu">
-                                <li><a href="http://google.com">google search</a></li>
-                                <li><a href="http://images.google.com">google images</a></li>
-                                <li><a href="http://about.google">about google</a></li>
+                                <li class="first-sub"><a href="https://freddy-fazbears-pizza.fandom.com/wiki/Foxy_the_Pirate">Foxy</a></li>
+                                <li><a href="https://freddy-fazbears-pizza.fandom.com/wiki/Funtime_Foxy">Funtime Foxy</a></li>
+                                <li><a href="https://freddy-fazbears-pizza.fandom.com/wiki/Mangle">The Mangle</a></li>
                             </ul>
                         </li>
                     </ul>
                     <br>
                     <h4>5 DECADES OF  <br><strong>FREDDY FAZBEAR'S PIZZA</strong><br></h4>
+                    </div>
                     <br>
-                    <h5>Freddy and the gang are expanding their reach across Utah! Celebrate FAZBEAR ENTERTAINMENT's 50th anniversary with brand new location:</h5>
+                    <h5 id="celebration">Freddy and the gang are expanding their reach across Utah! Celebrate FAZBEAR ENTERTAINMENT's 50th anniversary with brand new location:</h5>
                     <div>
                         <h1>FREDDY FAZBEAR'S</h1>
                         <h2>PIZZA PLACE</h2>
@@ -66,11 +77,17 @@
         <aside>
                 <h1 id="plus">+</h1>
                 <div id="sidetext">
-                    <p>MEET THE MIMIC</p>
-                    <p>CURSE OF THE DREADBEAR</p>
-                    <p>MAKE A PAPER PAL</p>
-                    <p>MEDIOCRE MELODIES</p>
-                    <p>LEARN FAZBEAR ENTERTAINMENT'S HISTORY</p>
+                    <div id="firstSide">
+                        <a href="https://freddy-fazbears-pizza.fandom.com/wiki/The_Mimic">MEET THE MIMIC</a> <a href="https://fnaflore.com/resources/childrens-pictures/fnaf1/">FAZART COMPETITION</a>
+                        <a href="https://freddy-fazbears-pizza.fandom.com/wiki/Paperpals_(FW)">MAKE A PAPER PAL</a>
+                        <a href="https://freddy-fazbears-pizza.fandom.com/wiki/Mediocre_Melodies">MEDIOCRE MELODIES</a>
+                        <a href="https://freddy-fazbears-pizza.fandom.com/wiki/Fazbear_Entertainment,_Inc.">LEARN FAZBEAR ENTERTAINMENT'S HISTORY</a>
+                    </div>
+                    <p><a href="https://freddy-fazbears-pizza.fandom.com/wiki/The_Mimic">MEET THE MIMIC</a></p>
+                    <p><a href="https://fnaflore.com/resources/childrens-pictures/fnaf1/">FAZART COMPETITION</a></p>
+                    <p><a href="https://freddy-fazbears-pizza.fandom.com/wiki/Paperpals_(FW)">MAKE A PAPER PAL</a></p>
+                    <p><a href="https://freddy-fazbears-pizza.fandom.com/wiki/Mediocre_Melodies">MEDIOCRE MELODIES</a></p>
+                    <p><a href="https://freddy-fazbears-pizza.fandom.com/wiki/Fazbear_Entertainment,_Inc.">LEARN FAZBEAR ENTERTAINMENT'S HISTORY</a></p>
                 </div>
                 <div class="graphic">
                     <!-- <div id="gText">
@@ -81,9 +98,12 @@
                         <h1>Future</h1>
                         <p>MEDIA WITH PASSION</p>
                     </div> -->
-                    <img src="media/Helpy_Dance.webp" alt="">
+                    <div class="SonicGraphic" id="sonicGraphic2">
+                        <img src="media/FE_logo_FFPS.webp" alt="">
+                    </div>
+                    <img id="helpy" src="media/Helpy_Dance.webp" alt="">
                 </div>
         </aside>
-    </section>
+    </div>
 </body>
 </html>
