@@ -42,7 +42,7 @@ class EvilCircle extends PIXI.Graphics {
     constructor(radius, color = 0xff0000, x = 0, y = 0) {
         super();
         this.circle(x, y, radius);
-        this.fill(0xff0000);
+        this.fill(color);
         this.x = x;
         this.y = y;
         this.radius = radius;

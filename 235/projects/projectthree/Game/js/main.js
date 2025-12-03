@@ -12,7 +12,8 @@ let assets;
 
 // game variables
 let startScene;
-let gameScene, ship, shipbox, boss, scoreLabel, lifeLabel, gameOverScoreLabel, shootSound, hitSound, fireballSound;
+let instructionsScene;
+let gameScene, ship, shipbox, boss, scoreLabel, lifeLabel, warpableLabel, siphonLabel, gameOverScoreLabel, shootSound, hitSound, fireballSound;
 let gameOverScene;
 
 let circles = [];
@@ -21,6 +22,8 @@ let bullets = [];
 let explosions = [];
 let explosionTextures;
 let score = 0;
+let canSiphon = false;
+let siphonCount = 0;
 let life = 100;
 let levelNum = 1;
 let paused = true;
@@ -30,6 +33,7 @@ let newY;
 
 let lastNumber = null;
 let iFrames = false;
+let warpable = true;
 let spawnInterval = 80;
 let spawnTimer = 0;
 
@@ -38,6 +42,12 @@ let attackTimer = 0;
 
 let attackInterval2 = 1000;
 let attackTimer2 = 0;
+
+let siphonInterval = 6000;
+let siphonTimer = 0;
+
+let warpInterval = 1000;
+let warpTimer = 0;
 
 let grid = [
       [],
@@ -54,7 +64,8 @@ let keys = {
     w: false,
     s: false,
     a: false,
-    d: false
+    d: false,
+    " ": false,
 };
 
 document.addEventListener("keydown", (e) => {
@@ -132,7 +143,27 @@ function createLabelsAndButtons(){
     startButton.on("pointerout", (e) => (e.currentTarget.alpha = 1.0));
     startScene.addChild(startButton);
 
-    
+    let instructionsButton = new PIXI.Text("instructions", buttonStyle);
+    instructionsButton.x = sceneWidth / 2 - instructionsButton.width /2;
+    instructionsButton.y = sceneHeight - 200;
+    instructionsButton.interactive = true;
+    instructionsButton.buttonMode = true;
+    instructionsButton.on("pointerup", toInstructions);
+    instructionsButton.on("pointerover", (e) => (e.target.alpha = .7));
+    instructionsButton.on("pointerout", (e) => (e.currentTarget.alpha = 1.0));
+    startScene.addChild(instructionsButton);
+
+    let instructionsLabel = new PIXI.Text("Instructions", {
+        fill: 0xffffff,
+        fontSize: 96,
+        fontFamily: "Futura",
+        stroke: "0xff0000",
+        strokeThickness: 6,
+    });
+    instructionsLabel.x = 75;
+    instructionsLabel.y = 40;
+    instructionsScene.addChild(instructionsLabel);
+
     let textStyle = { 
         fill: 0xffffff, 
         fontSize: 18,
@@ -140,16 +171,56 @@ function createLabelsAndButtons(){
         stroke: 0xff0000, 
         strokeThickness: 4,
     };
+
+    let instructionsText = new PIXI.Text("Hold LMB/M1 to fire \n\t\t\t\tWASD to move", textStyle);
+    instructionsText.x = 75;
+    instructionsText.y = 250;
+    instructionsScene.addChild(instructionsText);
+
+    let instructionsText2 = new PIXI.Text("You can wrap around to \nthe other side of the grid\nto dodge attacks", textStyle);
+    instructionsText2.x = 75;
+    instructionsText2.y = 350;
+    instructionsScene.addChild(instructionsText2);
+
+    let instructionsText3 = new PIXI.Text("The evil green circle\nhas 200 hp, make sure to\nget rid of that guy", textStyle);
+    instructionsText3.x = sceneWidth - 75 - instructionsText3.width;
+    instructionsText3.y = 250;
+    instructionsScene.addChild(instructionsText3);
+
+    let instructionsText4 = new PIXI.Text("Press Space to absorb attacks\n(7 sec cd) after absorbing 10\nattacks you'll get an upgrade!", textStyle);
+    instructionsText4.x = sceneWidth - 50 - instructionsText4.width;
+    instructionsText4.y = 350;
+    instructionsScene.addChild(instructionsText4);
+
+    let backToStartButton = new PIXI.Text("main menu", buttonStyle);
+    backToStartButton.x = sceneWidth / 2 - backToStartButton.width /2;
+    backToStartButton.y = sceneHeight - 100;
+    backToStartButton.interactive = true;
+    backToStartButton.buttonMode = true;
+    backToStartButton.on("pointerup", backToStart);
+    backToStartButton.on("pointerover", (e) => (e.target.alpha = .7));
+    backToStartButton.on("pointerout", (e) => (e.currentTarget.alpha = 1.0));
+    instructionsScene.addChild(backToStartButton);
+  
     scoreLabel = new PIXI.Text("", textStyle);
     scoreLabel.x = 5;
-    scoreLabel.y = 5;
-    gameScene.addChild(scoreLabel);
+    scoreLabel.y = 5;    
     increaseScoreBy(0);
 
     lifeLabel = new PIXI.Text("", textStyle);
     lifeLabel.x = 5;
     lifeLabel.y = 26;
-    gameScene.addChild(lifeLabel);
+    decreaseLifeBy(0);
+
+    siphonLabel = new PIXI.Text("", textStyle);
+    siphonLabel.x = 5;
+    siphonLabel.y = 46;
+    decreaseLifeBy(0);
+
+    warpableLabel = new PIXI.Text("", textStyle);
+    warpableLabel.x = 5;
+    warpableLabel.y = 66;
+   
     decreaseLifeBy(0);
 
     let grdOffsetY = 30;
@@ -200,19 +271,15 @@ function createLabelsAndButtons(){
 
 function increaseScoreBy(value) {
     score += value;
-    scoreLabel.text = `Score: ${score}`;
-}
-
-function decreaseLifeBy(value) {
-    life -= value;
-    life = parseInt(life);
-    lifeLabel.text = `Life: ${life}%`;
+    if(boss){
+      scoreLabel.text = `Boss Hp: ${boss.hp}`;
+    }
 }
 
 function fireBullet() {
     if(paused) return;
 
-    let b = new Bullet(0xffffff, ship.x, ship.y);
+    let b = new Bullet(0x5f5f5f, ship.x, ship.y);
     bullets.push(b);
     gameScene.addChild(b);
     shootSound.play();
@@ -223,7 +290,7 @@ function fireBullets() {
 
     let b;
     for(let i = 0; i < 3; i++){
-        b = new Bullet(0xffffff, ship.x + (-10 + i * 10), ship.y);
+        b = new Bullet(0x7f7f7f, ship.x + (-10 + i * 10), ship.y);
         bullets.push(b);
         gameScene.addChild(b);
     }
@@ -236,16 +303,36 @@ function startGame(){
   gameScene.visible = true;
   levelNum = 1;
   score = 0;
+  warpable = true;
+  canSiphon = false;
+  siphonCount = 0;
   life = 100;
-  boss.hp = 200;
+  boss.hp = 300;
+  spawnTimer = 0;
+  attackTimer = 0;
+  attackTimer2 = 0;
+  siphonTimer = 0;
   increaseScoreBy(0);
-  decreaseLifeBy(0);
   ship.x = sceneWidth/2;
   ship.y = sceneHeight - (60 + 75/2);
   newX = ship.x;
   newY = ship.y;
   phase1();
   setTimeout(() => { paused = false}, 50);
+}
+
+function backToStart(){
+  startScene.visible = true;
+  gameOverScene.visible = false;
+  instructionsScene.visible = false;
+  gameScene.visible = false;
+}
+
+function toInstructions(){
+  startScene.visible = false;
+  instructionsScene.visible = true;
+  gameOverScene.visible = false;
+  gameScene.visible = false;
 }
 
 function loadLevel(){
@@ -290,7 +377,7 @@ function getRandomIntInclusive(min, max) {
 
 function invincible(){
   iFrames = true;
-  ship.tint = 0xff0000
+  ship.tint = 0xff0000;
   setTimeout(() => {
     iFrames = false;
     ship.tint = 0xffffff;
@@ -298,15 +385,34 @@ function invincible(){
     1000);
 }
 
+
+function siphon(){
+  siphonCount++;
+}
+
+function decreaseLifeBy(value) {
+  if(!canSiphon){
+    if(!iFrames){
+      life -= value;
+      life = parseInt(life);
+      lifeLabel.text = `Life: ${life}%`;
+      if(ship) invincible();
+    }
+  }else{
+    siphon();
+  }
+}
+
 function createEvilCircles(numCircles = 10){ 
     for (let i = 0; i < 2; i++) { 
-        let c = new EvilCircle(20);
+        let c = new EvilCircle(20, 0x3f9ff0);
         c.x = 50 + ((sceneWidth - 50 - 40) * i);
         c.y = sceneHeight/2 - 10;
         evilCircles.push(c);
         gameScene.addChild(c);
     }
 }
+
 function createRow(){ 
   let attack = getRandomIntInclusive(1, 2);
   switch(attack){
@@ -342,8 +448,7 @@ function dangerGrid(){
           grid[i][attack].setColor("0xffff00");
           timers.push(setTimeout(() => {
             if(rectsIntersect(grid[i][attack], shipbox)){
-              if(!iFrames) decreaseLifeBy(20);
-              invincible();
+              decreaseLifeBy(20);
             }
             grid[i][attack].setColor("0xff0000"); 
           }, 1000));
@@ -358,8 +463,7 @@ function dangerGrid(){
           grid[attack][i].setColor("0xffff00");
           timers.push(setTimeout(() => {
             if(rectsIntersect(grid[attack][i], shipbox)){
-              if(!iFrames) decreaseLifeBy(20);
-              invincible();
+              decreaseLifeBy(20);
             }
             grid[attack][i].setColor("0xff0000");
           }, 1000));
@@ -437,9 +541,14 @@ async function setup() {
   sceneWidth = app.renderer.width;
   sceneHeight = app.renderer.height;
 
-  // #1 - Create the `start` scene100
+  // #1 - Create the `start` scene
   startScene = new PIXI.Container();
   stage.addChild(startScene);
+
+  // #1 - Create the `instructions` scene
+  instructionsScene = new PIXI.Container();
+  instructionsScene.visible = false;
+  stage.addChild(instructionsScene);
   
   // #2 - Create the main `game` scene and make it invisible
   gameScene = new PIXI.Container();
@@ -458,6 +567,10 @@ async function setup() {
   gameScene.addChild(ship);
   gameScene.addChild(shipbox);
   gameScene.addChild(boss);
+  gameScene.addChild(scoreLabel);
+  gameScene.addChild(lifeLabel);
+  gameScene.addChild(siphonLabel);
+  gameScene.addChild(warpableLabel);
 
   // #6 - Load Sounds
   shootSound = new Howl({
@@ -489,7 +602,11 @@ function startAction() {
     if (holdIntervalId !== null) return; 
 
     holdIntervalId = setInterval(function() {
+      if(siphonCount < 10){
         fireBullet();
+      }else{
+        fireBullets();
+      }
     }, 100);
 }
 
@@ -504,6 +621,8 @@ function gameLoop(){
   if (paused) return; // keep this commented out for now
 
   //app.view.onclick = (score < 5) ? fireBullet : fireBullets;
+  warpableLabel.text = (warpable) ? "Can Warp": "Cannot Warp";
+  siphonLabel.text = (siphonTimer < siphonInterval) ? "Siphon: On Cooldown": "Siphon: Off Cooldown";
 
   app.view.addEventListener("mousedown", startAction);
   app.view.addEventListener("mouseup", stopAction);
@@ -515,18 +634,49 @@ function gameLoop(){
 
   // #2 - Move Ship
   let amount = 6 * deltaTime;
+
+  if(siphonTimer >= siphonInterval){
+    if (keys[" "]) {
+      canSiphon = true;
+      ship.tint = 0x00ffff;
+      setTimeout(() => {
+        canSiphon = false;
+        ship.tint = 0xffffff;
+        siphonTimer = 0;
+        },
+        2000);
+    }
+  }
+
+  if(warpTimer >= warpInterval){
+    warpable = true;
+  }
+
   if (keys.a) {
     newX -= 100;
     if(newX <= 90){
-      ship.x = 500;
-      newX = ship.x;
+      if(warpable){
+        ship.x = 500;
+        newX = ship.x;
+        warpable = false;
+        warpTimer = 0;
+      }else{
+        newX = 100;
+      }
+
     }
     keys.a = false;
   } else if (keys.d) {
     newX += 100;
     if(newX >= 510){
-      ship.x = 100;
-      newX = ship.x;
+      if(warpable){
+        ship.x = 100;
+        newX = ship.x;
+        warpable = false;
+        warpTimer = 0;
+      }else{
+        newX = 500;
+      }
     }
     keys.d = false;
   } else if (keys.w) {
@@ -556,11 +706,13 @@ function gameLoop(){
   spawnTimer += app.ticker.deltaMS;
   attackTimer += app.ticker.deltaMS;
   attackTimer2 += app.ticker.deltaMS;
+  siphonTimer += app.ticker.deltaMS;
+  warpTimer += app.ticker.deltaMS;
 
   if (spawnTimer >= spawnInterval) {
     for(let i = 0; i < 2; i++){
       if(evilCircles[i] != null){
-        let newC = new Circle(10, 0xff0000, 25 + (250 * i), 145);
+        let newC = new Circle(10, 0x3f9ff0, 25 + (250 * i), 145);
         newC.fwd.x = evilCircles[i].fwd.x;
         newC.fwd.y = evilCircles[i].fwd.y;
         circles.push(newC);
@@ -609,8 +761,7 @@ function gameLoop(){
         hitSound.play()
         gameScene.removeChild(c);
         c.IsAlive = false;
-        if(!iFrames) decreaseLifeBy(20);
-        invincible();
+        decreaseLifeBy(20);
         break;
     }
   }
@@ -660,20 +811,20 @@ function gameLoop(){
   }
 
   // #8 - Load next level
-  if (boss.hp > 150) {
+  if (boss.hp > 225) {
     phase1();
   }
-  if (boss.hp <= 150 && boss.hp > 100) {
+  if (boss.hp <= 250 && boss.hp > 150) {
     levelNum++;
     phase1();
     //phase2();
   }
-  if (boss.hp <= 100 && boss.hp > 50) {
+  if (boss.hp <= 150 && boss.hp > 100) {
     levelNum++;
     phase1();
     //phase3();
   }
-  if (boss.hp <= 50 && boss.hp > 0) {
+  if (boss.hp <= 100 && boss.hp > 0) {
     levelNum++;
     phase1();
     //phase4();
