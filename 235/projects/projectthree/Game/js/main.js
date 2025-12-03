@@ -1,3 +1,4 @@
+
 // We will use `strict mode`, which helps us by having the browser catch many common JS mistakes
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 "use strict";
@@ -11,12 +12,12 @@ let assets;
 
 // game variables
 let startScene;
-let gameScene, ship, scoreLabel, lifeLabel, gameOverScoreLabel, shootSound, hitSound, fireballSound;
+let gameScene, ship, shipbox, boss, scoreLabel, lifeLabel, gameOverScoreLabel, shootSound, hitSound, fireballSound;
 let gameOverScene;
 
 let circles = [];
+let evilCircles = [];
 let bullets = [];
-let aliens = [];
 let explosions = [];
 let explosionTextures;
 let score = 0;
@@ -26,6 +27,17 @@ let paused = true;
 
 let newX;
 let newY;
+
+let lastNumber = null;
+let iFrames = false;
+let spawnInterval = 80;
+let spawnTimer = 0;
+
+let attackInterval = 2500;
+let attackTimer = 0;
+
+let attackInterval2 = 1000;
+let attackTimer2 = 0;
 
 let grid = [
       [],
@@ -225,13 +237,14 @@ function startGame(){
   levelNum = 1;
   score = 0;
   life = 100;
+  boss.hp = 200;
   increaseScoreBy(0);
   decreaseLifeBy(0);
   ship.x = sceneWidth/2;
   ship.y = sceneHeight - (60 + 75/2);
   newX = ship.x;
   newY = ship.y;
-  loadLevel();
+  phase1();
   setTimeout(() => { paused = false}, 50);
 }
 
@@ -269,15 +282,150 @@ function createExplosion(x, y, frameWidth, frameHeight){
     expl.play();
 }
 
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function invincible(){
+  iFrames = true;
+  ship.tint = 0xff0000
+  setTimeout(() => {
+    iFrames = false;
+    ship.tint = 0xffffff;
+    },
+    1000);
+}
+
+function createEvilCircles(numCircles = 10){ 
+    for (let i = 0; i < 2; i++) { 
+        let c = new EvilCircle(20);
+        c.x = 50 + ((sceneWidth - 50 - 40) * i);
+        c.y = sceneHeight/2 - 10;
+        evilCircles.push(c);
+        gameScene.addChild(c);
+    }
+}
+function createRow(){ 
+  let attack = getRandomIntInclusive(1, 2);
+  switch(attack){
+      case 1:
+        for (let i = 0; i < 10; i++) { 
+            let c = new Circle (10);
+            c.x = 75 + (50 * i);
+            c.y = 25 + (25 * i);
+            circles.push(c);
+            gameScene.addChild(c);
+        }
+        break;
+      case 2:
+        for (let i = 10; i > 0; i--) { 
+            let c = new Circle (10);
+            c.x = sceneWidth - 25 - (50 * i);
+            c.y = 25 + (25 * i);
+            circles.push(c);
+            gameScene.addChild(c);
+        }
+        break;
+      }
+}
+
+function dangerGrid(){ 
+    let attack = getRandomIntInclusive(1, 2);
+    let timers = [];
+    let deltaTime = 1 / app.ticker.FPS;
+    switch(attack){
+      case 1:
+        attack = getRandomIntInclusive(0, 4);
+        for (let i = 0; i < 4; i++) {
+          grid[i][attack].setColor("0xffff00");
+          timers.push(setTimeout(() => {
+            if(rectsIntersect(grid[i][attack], shipbox)){
+              if(!iFrames) decreaseLifeBy(20);
+              invincible();
+            }
+            grid[i][attack].setColor("0xff0000"); 
+          }, 1000));
+          timers.push(setTimeout(() => {
+            grid[i][attack].setColor("0xffffff");
+          }, 1500));
+        }
+        break;
+      case 2:
+        attack = getRandomIntInclusive(0, 3);
+        for (let i = 0; i < 5; i++) {
+          grid[attack][i].setColor("0xffff00");
+          timers.push(setTimeout(() => {
+            if(rectsIntersect(grid[attack][i], shipbox)){
+              if(!iFrames) decreaseLifeBy(20);
+              invincible();
+            }
+            grid[attack][i].setColor("0xff0000");
+          }, 1000));
+          timers.push(setTimeout(() => {
+            grid[attack][i].setColor("0xffffff");
+          }, 1500));
+        }
+        break;
+    }
+}
 
 function createCircles(numCircles = 10){ 
     for (let i = 0; i < numCircles; i++) { 
-        let c = new Circle (10, 0xffff00);
-        c.x = Math.random() * (sceneWidth - 50) + 25;      
+        let c = new Circle (10);
+        c.x = 100 * getRandomIntInclusive(1, 5);
         c.y = Math.random() * (sceneHeight - 400) + 25;
         circles.push(c);
         gameScene.addChild(c);
     }
+}
+
+function phase1(){
+  let attack;
+  if(attackTimer >= attackInterval){
+    attackTimer = 0;
+    do {
+      attack = getRandomIntInclusive(1, 2);
+    } while (attack === lastNumber);
+    lastNumber = attack;
+    switch(attack){
+      case 1:
+      if(evilCircles.length == 0){
+        createEvilCircles();
+        setTimeout(() => {
+          for(let c of evilCircles){
+            gameScene.removeChild(c);
+            c.IsAlive = false;
+          }
+        },
+        5000);
+        }
+        else{
+          createCircles(5);
+        }
+        break;
+      case 2:
+        createRow();
+        break;
+      case 3:
+        dangerGrid(); 
+        break;
+    }
+  }
+    if(attackTimer2 >= attackInterval2){
+    attackTimer2 = 0;
+    attack = getRandomIntInclusive(1, 3);
+    switch(attack){
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        dangerGrid(); 
+        break;
+    }
+  }
 }
 
 async function setup() {
@@ -289,7 +437,7 @@ async function setup() {
   sceneWidth = app.renderer.width;
   sceneHeight = app.renderer.height;
 
-  // #1 - Create the `start` scene
+  // #1 - Create the `start` scene100
   startScene = new PIXI.Container();
   stage.addChild(startScene);
   
@@ -305,7 +453,11 @@ async function setup() {
   createLabelsAndButtons();
   // #5 - Create ship
   ship = new Ship(assets.spaceship);
+  shipbox = new ShipBox(5);
+  boss = new Boss(220, 0x00ff00, sceneWidth/2 - 150, sceneHeight/8 - 50);
   gameScene.addChild(ship);
+  gameScene.addChild(shipbox);
+  gameScene.addChild(boss);
 
   // #6 - Load Sounds
   shootSound = new Howl({
@@ -331,10 +483,31 @@ async function setup() {
   // Clicking the button calls startGame()
 }
 
+let holdIntervalId = null;
+
+function startAction() {
+    if (holdIntervalId !== null) return; 
+
+    holdIntervalId = setInterval(function() {
+        fireBullet();
+    }, 100);
+}
+
+function stopAction() {
+    if (holdIntervalId !== null) {
+        clearInterval(holdIntervalId);
+        holdIntervalId = null;
+    }
+}
+
 function gameLoop(){
   if (paused) return; // keep this commented out for now
 
-  app.view.onclick = (score < 5) ? fireBullet : fireBullets;
+  //app.view.onclick = (score < 5) ? fireBullet : fireBullets;
+
+  app.view.addEventListener("mousedown", startAction);
+  app.view.addEventListener("mouseup", stopAction);
+  app.view.addEventListener("mouseleave", stopAction);
 
   // #1 - Calculate "delta time"
   let deltaTime = 1 / app.ticker.FPS;
@@ -375,18 +548,52 @@ function gameLoop(){
   let lerpY = lerp(ship.y, newY, amount);
   ship.x = clamp(lerpX, 65 + w2, sceneWidth - w2);
   ship.y = clamp(lerpY, 0 + h2, sceneHeight - h2);
+  shipbox.x = ship.x;
+  shipbox.y = ship.y;
 
   // #3 - Move Circles
+
+  spawnTimer += app.ticker.deltaMS;
+  attackTimer += app.ticker.deltaMS;
+  attackTimer2 += app.ticker.deltaMS;
+
+  if (spawnTimer >= spawnInterval) {
+    for(let i = 0; i < 2; i++){
+      if(evilCircles[i] != null){
+        let newC = new Circle(10, 0xff0000, 25 + (250 * i), 145);
+        newC.fwd.x = evilCircles[i].fwd.x;
+        newC.fwd.y = evilCircles[i].fwd.y;
+        circles.push(newC);
+        gameScene.addChild(newC);
+      }
+    }
+    spawnTimer = 0;
+  }
+  
+
+  for(let c of evilCircles){
+    c.rotate(deltaTime, 15);
+  }
+
   for(let c of circles){
     c.move(deltaTime);
-    if(c.x <= c.radius || c.x >= sceneWidth - c.radius){
-        c.reflectX();
-        c.move(deltaTime);
+    if(c.x <= c.radius || c.x >= sceneWidth + c.radius){
+        gameScene.removeChild(c);
+        c.IsAlive = false;
+    }
+    if(c.x <= c.radius || c.x <= 0 - c.radius){
+        gameScene.removeChild(c);
+        c.IsAlive = false;
     }
 
-    if(c.y <= c.height || c.y >= sceneHeight - c.radius){
-        c.reflectY();
-        c.move(deltaTime);
+    if(c.y <= c.height || c.y >= sceneHeight + c.radius){
+        gameScene.removeChild(c);
+        c.IsAlive = false;
+    }
+
+    if(c.y <= c.height || c.y <= 0 - c.radius){
+        gameScene.removeChild(c);
+        c.IsAlive = false;
     }
   }
 
@@ -398,30 +605,48 @@ function gameLoop(){
   // #5 - Check for Collisions
 
   for(let c of circles){
-    for(let b of bullets){
-        if(rectsIntersect(c, b)){
-            fireballSound.play();
-            createExplosion(c.x,c.y,64,64);
-            gameScene.removeChild(c);
-            c.IsAlive = false;
-            gameScene.removeChild(b);
-            b.IsAlive = false;
-            increaseScoreBy(1);
-            break;
-        }
-    }
-    if(c.IsAlive && rectsIntersect(c, ship)){
+    if(c.IsAlive && rectsIntersect(c, shipbox)){
         hitSound.play()
         gameScene.removeChild(c);
         c.IsAlive = false;
-        decreaseLifeBy(20);
+        if(!iFrames) decreaseLifeBy(20);
+        invincible();
+        break;
     }
   }
+
+  for(let row of grid){
+    for(let g of row){
+      if(rectsIntersect(g, shipbox)){
+          g.PlayerOn = true;
+      }
+      else{
+        g.PlayerOn = false;
+      }
+    }
+  }
+
+  for(let b of bullets){
+        if(rectsIntersect(boss, b)){
+            fireballSound.play();
+            //createExplosion(c.x,c.y,64,64);
+            if(boss.hp == 0) gameScene.removeChild(boss);
+            boss.IsAlive = false;
+            gameScene.removeChild(b);
+            b.IsAlive = false;
+            increaseScoreBy(1);
+            boss.decreaseHp();
+            break;
+        }
+    }
+
   // #6 - Now do some clean up
 
   bullets = bullets.filter((b) => b.IsAlive);
 
   circles = circles.filter((c) => c.IsAlive);
+
+  evilCircles = evilCircles.filter((c) => c.IsAlive);
   
   explosions = explosions.filter((e) => e.IsAlive);
   // #7 - Is game over?
@@ -429,11 +654,29 @@ function gameLoop(){
     end();
     return;
   }
+  if (boss.hp <= 0){
+    end();
+    return;
+  }
 
   // #8 - Load next level
-  if (circles.length == 0) {
+  if (boss.hp > 150) {
+    phase1();
+  }
+  if (boss.hp <= 150 && boss.hp > 100) {
     levelNum++;
-    loadLevel();
+    phase1();
+    //phase2();
+  }
+  if (boss.hp <= 100 && boss.hp > 50) {
+    levelNum++;
+    phase1();
+    //phase3();
+  }
+  if (boss.hp <= 50 && boss.hp > 0) {
+    levelNum++;
+    phase1();
+    //phase4();
   }
 }
 
