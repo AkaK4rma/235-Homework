@@ -634,6 +634,7 @@ function gameLoop(){
 
   // #2 - Move Ship
   let amount = 6 * deltaTime;
+  let moveY = 60;
 
   if(siphonTimer >= siphonInterval){
     if (keys[" "]) {
@@ -653,7 +654,7 @@ function gameLoop(){
   }
 
   if (keys.a) {
-    newX -= 100;
+    newX -= moveX;
     if(newX <= 90){
       if(warpable){
         ship.x = 500;
@@ -666,8 +667,7 @@ function gameLoop(){
 
     }
     keys.a = false;
-  } else if (keys.d) {
-    newX += 100;
+    newX += moveX;
     if(newX >= 510){
       if(warpable){
         ship.x = 100;
@@ -681,12 +681,12 @@ function gameLoop(){
     keys.d = false;
   } else if (keys.w) {
     if(newY > 440){
-      newY -= 60;
+      newY -= moveY;
       keys.w = false;
     }
-  } else if (keys.s) {
+  } if (keys.s) {
     if(newY < 510){
-      newY += 60;
+      newY += moveY;
       keys.s = false;
     }
   }
