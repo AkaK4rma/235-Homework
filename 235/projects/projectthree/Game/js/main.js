@@ -65,23 +65,13 @@ let keys = {
     s: false,
     a: false,
     d: false,
+    W: false,
+    S: false,
+    A: false,
+    D: false,
     " ": false,
+    Shift: false,
 };
-
-let shift = false;
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Shift") {
-      if (e.repeat) return;
-        shift = true;
-    }
-  });
-
-  document.addEventListener("keyup", (e) => {
-      if (e.key === "Shift") {
-          shift = false;
-      }
-  });
 
 document.addEventListener("keydown", (e) => {
     if (e.repeat) return; // Prevent stuttering from OS key repeat
@@ -669,7 +659,12 @@ function gameLoop(){
     warpable = true;
   }
 
-  if (keys.a) {
+  if(keys.Shift){
+    moveX *= 2;
+    moveY *= 2;
+  }
+
+  if (keys.a || keys.A || keys.ArrowLeft) {
     newX -= moveX;
     if(newX <= 90){
       if(warpable){
@@ -680,10 +675,11 @@ function gameLoop(){
       }else{
         newX = 100;
       }
-
     }
     keys.a = false;
-  } if (keys.d) {
+    keys.A = false;
+    keys.ArrowLeft = false;
+  } if (keys.d || keys.D || keys.ArrowRight) {
     newX += moveX;
     if(newX >= 510){
       if(warpable){
@@ -696,15 +692,21 @@ function gameLoop(){
       }
     }
     keys.d = false;
-  } if (keys.w) {
+    keys.D = false;
+    keys.ArrowRight = false;
+  } if (keys.w || keys.W || keys.ArrowUp) {
     if(newY > 440){
       newY -= moveY;
       keys.w = false;
+      keys.W = false;
+      keys.ArrowUp = false;
     }
-  } if (keys.s) {
+  } if (keys.s || keys.S || keys.ArrowDown) {
     if(newY < 510){
       newY += moveY;
       keys.s = false;
+      keys.S = false;
+      keys.ArrowDown = false;
     }
   }
 
