@@ -68,6 +68,21 @@ let keys = {
     " ": false,
 };
 
+let shift = false;
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Shift") {
+      if (e.repeat) return;
+        shift = true;
+    }
+  });
+
+  document.addEventListener("keyup", (e) => {
+      if (e.key === "Shift") {
+          shift = false;
+      }
+  });
+
 document.addEventListener("keydown", (e) => {
     if (e.repeat) return; // Prevent stuttering from OS key repeat
     if (keys.hasOwnProperty(e.key)) {
@@ -634,6 +649,7 @@ function gameLoop(){
 
   // #2 - Move Ship
   let amount = 6 * deltaTime;
+  let moveX = 100;
   let moveY = 60;
 
   if(siphonTimer >= siphonInterval){
@@ -667,6 +683,7 @@ function gameLoop(){
 
     }
     keys.a = false;
+  } if (keys.d) {
     newX += moveX;
     if(newX >= 510){
       if(warpable){
@@ -679,7 +696,7 @@ function gameLoop(){
       }
     }
     keys.d = false;
-  } else if (keys.w) {
+  } if (keys.w) {
     if(newY > 440){
       newY -= moveY;
       keys.w = false;
