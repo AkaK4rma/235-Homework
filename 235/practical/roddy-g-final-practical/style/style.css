@@ -1,0 +1,90 @@
+body {
+  /* TODO: Set the body font to a sans-serif font */
+  font-family: sans-serif;
+  text-align: center;
+  padding: 1rem;
+}
+
+#game {
+  /* TODO: Set the game div to use CSS Grid to lay out it's children divs */
+
+  /* TODO: Create a 3 by 3 grid where each column/row is 100px wide/tall */
+
+  display: grid;
+  grid-template-columns: repeat(100px, 3);
+  grid-template-rows: repeat(100px, 3);
+  gap: 10px;
+  justify-content: center;
+  grid-template-areas:
+    ".     up     ."
+    "left  center right"
+    ".     down   .";
+}
+
+/* TODO: Assign each of these elements to the appropriate named grid-area above */
+#cell-up {
+  grid-area: up;
+}
+
+#cell-right {
+  grid-area: right;
+}
+
+#cell-down {
+  grid-area: down;
+}
+
+#cell-left {
+  grid-area: left;
+}
+
+#pixi-container {
+  grid-area: center;
+  width: 100px;
+  height: 100px;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 100px;
+
+  border: 1.5px solid gray;
+
+  background-color: lightgray;
+
+  font-weight: bold;
+}
+
+.correct {
+  /* TODO: set the background color of a correct answer to lightgreen */
+  background-color: lightgreen;
+}
+
+.wrong {
+  /* TODO: set the background color of a correct answer to lightcoral */
+  background-color: coral;
+}
+
+#pixi-container {
+  
+}
+
+#score-container {
+  text-align: center;
+  height: 3rem;
+  margin: 1rem 0;
+}
+
+.score-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hidden {
+  display: none;
+}

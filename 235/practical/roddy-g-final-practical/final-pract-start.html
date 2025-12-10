@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ArrowMatch Practical</title>
+
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+  <h1>ArrowMatch Practical</h1>
+
+   <p> Use the arrow keys to spin an arrow in a small PixiJS app in the center of the screen. 
+    When the arrow of the app points at the word you believe to be the “odd-one-out” selection,
+    press the space bar. If you’re correct, the selection will highlight green and your score will
+    increase by 10 points! If you're wrong.. well... you're wrong!.</p>
+
+  <div id="score-container">
+    <div class="score-row">
+      <div id="score">Score: 0</div>
+      <button id="restart" class="hidden">Play Again</button>
+    </div>
+  </div>
+
+
+  <div id="game">
+    <div class="cell" id="cell-up" data-dir="0"></div>
+    <div class="cell" id="cell-right" data-dir="1"></div>
+    <div id="pixi-container"></div>
+    <div class="cell" id="cell-down" data-dir="2"></div>
+    <div class="cell" id="cell-left" data-dir="3"></div>
+  </div>
+
+
+  <script src="js/main.js" type="module"></script>
+</body>
+
+</html>
