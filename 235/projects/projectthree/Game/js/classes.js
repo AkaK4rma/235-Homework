@@ -1,4 +1,4 @@
-class Ship extends PIXI.Sprite{
+ class Ship extends PIXI.Sprite{
     constructor(texture, x = 0, y = 0){
         super(texture);
         this.anchor.set(.5, .5);
@@ -30,6 +30,7 @@ class Circle extends PIXI.Graphics {
         this.fwd = {x: 0, y: 1 };
         this.speed = 150;
         this.IsAlive = true;
+        this.red = true;
     }
 
     move(deltaTime = 1 / 60) {
@@ -45,15 +46,22 @@ class EvilCircle extends PIXI.Graphics {
         this.fill(color);
         this.x = x;
         this.y = y;
+        this.moving = false;
         this.radius = radius;
         this.fwd = {x: 0, y: 1};
+        this.fwd2 = {x: 0, y: 1};
         this.speed = 150;
         this.IsAlive = true;
         this.rotation = 0;
+        this.color = color;
+    }
+
+    move(deltaTime = 1 / 60) {
+        this.y += this.fwd2.y * this.speed * deltaTime;
     }
 
     rotate(deltaTime = 1 / 60, angle) {
-        this.rotation += 10 * deltaTime;
+        this.rotation += angle * deltaTime;
         this.updateForwardVector();
     }
 
@@ -105,7 +113,6 @@ class Bullet extends PIXI.Graphics {
         this.fill(color);
         this.x = x;
         this.y = y;
-        
         this.fwd = {x: 0, y: -1 };
         this.speed = 400;
         this.IsAlive = true;
