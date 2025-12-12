@@ -1,14 +1,14 @@
- class Ship extends PIXI.Sprite{
+ class Player extends PIXI.Sprite{
     constructor(texture, x = 0, y = 0){
         super(texture);
         this.anchor.set(.5, .5);
-        this.scale.set(.1);
+        this.scale.set(.15);
         this.x = x;
         this.y = y;
     }
 }
 
-class ShipBox extends PIXI.Graphics{
+class HurtBox extends PIXI.Graphics{
     constructor(radius, x = 0, y = 0){
         super();
         this.circle(x, y, radius);
@@ -71,16 +71,17 @@ class EvilCircle extends PIXI.Graphics {
     }
 }
 
-class Boss extends PIXI.Graphics {
-    constructor(radius, color = 0xff0000, x = 0, y = 0) {
-        super();
-        this.circle(x, y, radius);
-        this.fill(color); 
+class Boss extends PIXI.Sprite {
+    constructor(texture, size, x = 0, y = 0) {
+        super(texture);
+        this.scale.set(size);
+        this.size = size;
+        this.anchor.set(0.5, 0.5);
         this.x = x;
         this.y = y;
-        this.radius = radius;
         this.IsAlive = true;
         this.hp = 200;
+        this.maxHP = 1500;
     }
 
     decreaseHp(){
