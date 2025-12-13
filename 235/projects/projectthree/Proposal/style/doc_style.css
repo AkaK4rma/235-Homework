@@ -1,0 +1,210 @@
+/* --- CSS Variables for Theme: Dark Nature/Geomancy --- */
+:root {
+    --bg-dark: #121f1d;        /* Very dark forest green/blue for background */
+    --card-bg: #1e3a35;        /* Dark teal/green for cards */
+    --text-main: #e0f2e8;      /* Light, earthy text */
+    --accent-gold: #c1e8ff;    /* Earthy, metallic gold/brown for emphasis */
+    --accent-leaf: #79ac8e;    /* Muted leaf green for headers */
+    --accent-dark: #3b6c62;    /* Dark accent for lines/borders */
+    --font-header: 'Righteous', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+/* --- Reset & Global Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* --- Typography --- */
+h1, h2, h3, dt {
+    font-family: var(--font-header);
+    color: var(--accent-leaf);
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 2.8rem;
+    text-align: center;
+    text-shadow: 0 0 8px rgba(121, 172, 142, 0.4);
+}
+
+h2 {
+    border-bottom: 2px solid var(--accent-dark);
+    padding-bottom: 8px;
+    font-size: 1.6rem;
+}
+
+h3 {
+    color: var(--accent-gold);
+    font-size: 1.1rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+strong {
+    color: var(--accent-gold);
+}
+
+/* --- Header --- */
+.main-header {
+    text-align: center;
+    padding: 40px 0;
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--accent-leaf);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--accent-gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-style: italic;
+}
+
+/* --- Grid Layout --- */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 25px;
+    align-items: start;
+}
+
+/* --- Cards --- */
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.highlight-card {
+    border-left: 5px solid var(--accent-gold);
+}
+
+/* Icon styling */
+.card h2 i {
+    margin-right: 10px;
+    color: var(--accent-leaf);
+}
+
+/* --- Lists --- */
+ul, ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+    padding-left: 0;
+    list-style-type: none; /* Remove default marker */
+}
+
+li {
+    margin-bottom: 8px;
+    padding-left: 1.5em; /* Space for custom marker */
+    position: relative;
+}
+
+ul li::before {
+    content: "\f0d7"; /* FontAwesome: Caret Down/Triangle */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--accent-gold);
+    position: absolute;
+    left: 0;
+    font-size: 0.8em;
+    top: 0.2em;
+}
+
+ol.process-list li::before {
+    content: counter(list-item) ".";
+    color: var(--accent-leaf);
+    font-weight: bold;
+    font-family: var(--font-header);
+    position: absolute;
+    left: 0;
+    padding-right: 5px;
+}
+
+/* Description List for Details/Resources */
+dl {
+    margin-bottom: 15px;
+}
+dt {
+    font-weight: bold;
+    color: var(--accent-gold);
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+dd {
+    margin-left: 0;
+    padding-left: 15px;
+    border-left: 2px solid var(--accent-dark);
+    margin-bottom: 10px;
+}
+
+a {
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 5px;
+  transition: 0.5s ease;
+  border-radius: 10px;
+}
+a:visited {
+  color: var(--text-main);
+  text-decoration: none;
+  transition: 0.5s ease;
+  border-radius: 10px;
+}
+a:hover {
+  color: var(--text-main);
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: 0.5s ease;
+}
+
+
+/* --- Footer --- */
+.doc-footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    border-top: 1px solid var(--accent-dark);
+    font-size: 0.9rem;
+    color: #a0b2aa;
+}
+
+.citation-note {
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .grid-layout {
+        grid-template-columns: 1fr; /* Stack to one column */
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+}

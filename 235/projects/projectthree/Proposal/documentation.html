@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 3 Documentation - Geomancy</title>
+    <link rel="stylesheet" href="style/doc_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="main-header">
+            <h1><i class="fa-solid fa-file-invoice"></i> Project 3 Documentation</h1>
+            <p class="subtitle">Geomancy - A Grid-Based Bullet-Hell</p>
+        </header>
+
+        <main class="grid-layout">
+            
+            <div class="column left-col">
+                
+                <section class="card highlight-card">
+                    <h2><i class="fa-solid fa-lightbulb"></i> Concept & Overview</h2>
+                    <p><strong>Geomancy</strong> is a bullet-hell game played on a grid. The player takes on the role of a vizard who must combine movement and a Siphon mechanic (similar to <em>Ikaruga's</em> polarity switching) to survive and defeat a massive Evil Tree.</p>
+                </section>
+
+                <section class="card">
+                    <h2><i class="fa-solid fa-calendar-check"></i> Project Details</h2>
+                    <dl class="details-list">
+                        <dt>Developer</dt>
+                        <dd>Gabriel Roddy</dd>
+                        
+                        <dt>Course</dt>
+                        <dd>Web Tech</dd>
+                        
+                        <dt>Instructor</dt>
+                        <dd>Professor Wheeland</dd>
+
+                        <dt>Date</dt>
+                        <dd>12/12/2025</dd>
+                    </dl>
+                </section>
+
+                <section class="card">
+                    <h2><i class="fa-solid fa-clipboard-list"></i> Developer Notes & Reflections</h2>
+                    <p>I might not have been able to fully realize the concepts on the proposal, but I am very happy with how the game turned out.</p>
+                    
+                    <h3>Notes</h3>
+                    <ul>
+                        <li>After struggling to implement advanced screen effects (CRT filters, bloom, and other effects) for hours, I abandoned the idea and stuck to the default renderer. It sucks because I really wanted to add them.. But alas.</li>
+                        <li>Time was a major issue. I had to work on this, as well as 2 other games and 1 other 3D modeling project simultaneously with similar due dates.</li>
+                        <li>I don't know if the game is beatable right now as I have not been able to beat it after the final difficulty increase. This means I couldn't test the logic for the game's ending. The logic for winning was working before, but I made minor changes that I was not able to test before submission.</li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="column right-col">
+                <section class="card">
+                    <h2><i class="fa-solid fa-shoe-prints"></i> Development Process</h2>
+                    <p>Like Project 2, my process was characterized by trial and error. I leveraged my existing knowledge of the MonoGame framework to translate those skills over to the PixiJS library, which was quite similar.</p>
+                    
+                    <h3>Development Phases</h3>
+                    <ol class="process-list">
+                        <li><strong>Core Gameplay First:</strong> I initially placed my focus on on main gameplay features like movement, shooting, and damage to have a concept ready for critique day.</li>
+                        <li><strong>Feature Completion:</strong> After a short break to focus on other projects, the remaining features such as the completed siphon mechanic were completed.</li>
+                        <li><strong>Aesthetics & Polish:</strong> After completing the features work shifted to fixing bugs, implementing aesthetics and animation, and playtesting while tweaking values until the game felt decent.</li>
+                    </ol>
+
+                    <h3>Future Plans</h3>
+                    <p>I don't want to keep developing this in pixi.js. I love the concept and would love to develop it further, but I’d port it over to Unity or a different potentially continuing.</p>
+                </section>
+
+                <section class="card">
+                    <h2><i class="fa-solid fa-cube"></i> Resources Used</h2>
+                    <dl class="resource-list">
+                        <dt>Fonts</dt>
+                        <dd><a href="https://www.dafont.com/daydream-3.font">Daydream font</a></dd>
+                        
+                        <dt>Sound Effects (SFX)</dt>
+                        <dd><a href="https://sfxr.me/">JSFXR</a> (<a href="https://sfbgames.itch.io/chiptone">Chip Tone</a> was an alternative considered)</dd>
+                        
+                        <dt>Assets Included</dt>
+                        <dd><a href="https://pixelfrog-assets.itch.io/treasure-hunters">Healthbar/UI</a>, <a href="https://pixelfrog-assets.itch.io/pixel-adventure-1">Menu Backgrounds</a>, <a href="https://danieldiggle.itch.io/sunnyside">Tree</a>, <a href="https://sethbb.itch.io/32rogues?download">Wizard</a></dd>
+                    </dl>
+                </section>
+
+                <section class="card">
+                    <h2><i class="fa-solid fa-cube"></i> Links</h2>
+                    <p><strong><a href="../Game/game.html">Play the game here</a></strong></p>
+                    <p><strong><a href="proposal.html">Read the proposal here</a></strong></p>
+                </section>
+            </div>
+
+        </main>
+
+        <footer class="doc-footer">
+            <p>&copy; 2025 Gabriel Roddy</p>
+        </footer>
+    </div>
+
+</body>
+</html>

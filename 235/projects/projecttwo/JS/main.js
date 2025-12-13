@@ -248,12 +248,12 @@ async function searchButtonClicked() {
 
   let term = "";
   if (yearBool2) {
-    term = `&end_date=${year.value}-12-31`;
+    term = `&end_date=${year2.value}-12-31`;
   }
   if (yearBool) {
     term = `&start_date=${year.value}-01-01`;
     if (yearBool2) {
-      term += `&end_date=${year.value}-12-31`;
+      term += `&end_date=${year2.value}-12-31`;
     }
   }
   url += "?q=";
